@@ -25,12 +25,22 @@ export default class App extends Component {
     return (
       <div className="App">
         <header>app header</header>
-        {/*<BlazeTemplate template={Template.loginButtons} />*/}
-        <h1>Hello Webpack!</h1>
-        <p>There are {userCount} users in the Minimongo  (login to change)</p>
-        <p>There are {postsCount} posts in the Minimongo  (autopublish removed)</p>
-        {/*<Link to="/feed"><button>Go to Feed</button></Link>*/}
-        {this.props.children}
+        { Meteor.userId() ? (
+          <section>
+            <h1>Hello Webpack!</h1>
+            <p>There are {userCount} users in the Minimongo  (login to change)</p>
+            <p>There are {postsCount} posts in the Minimongo  (autopublish removed)</p>
+            <BlazeTemplate template={Template.loginButtons} />
+            {/*<Link to="/feed"><button>Go to Feed</button></Link>*/}
+            {this.props.children}
+          </section>      
+          ) : (
+            <section>
+              <p>Please Login</p>
+              <BlazeTemplate template={Template.loginButtons} />
+            </section>
+          )
+        }
       </div>
     );
   }

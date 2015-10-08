@@ -15,14 +15,19 @@ Accounts.ui.config({
 
 console.log('Running on client only');
 
+function requireAuth(nextState, replaceState) {
+  if (!Meteor.userId())
+    replaceState({ nextPathname: nextState.location.pathname }, '/')
+}
+
 Meteor.startup(() => {
 	Meteor.subscribe("users", function() {
 	  ReactDOM.render(
 	  	<Router>
 	  		<Route path="/" component={App} >
 	  			<IndexRoute component={NearbyPeopleFeed} />
-	  			<Route path="feed" component={NearbyPeopleFeed}/>
-	  			<Route path="contact" component={Contact}/>
+	  			<Route path="feed" component={NearbyPeopleFeed} onEnter={requireAuth} />
+	  			<Route path="contact" component={Contact} onEnter={requireAuth} />
 	  		</Route>
 	  	</Router>
 	  , document.getElementById('root')
