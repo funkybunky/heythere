@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
 
-import { Router, Route } from 'react-router';
+import { Router, Route, IndexRoute } from 'react-router';
 import NearbyPeopleFeed from './components/NearbyPeopleFeed/NearbyPeopleFeed.jsx';
-// import Contact from './components/contact/Contact';
+import Contact from './components/Contact/Contact.jsx';
 
 import './method_example';
 
@@ -20,8 +20,9 @@ Meteor.startup(() => {
 	  ReactDOM.render(
 	  	<Router>
 	  		<Route path="/" component={App} >
+	  			<IndexRoute component={NearbyPeopleFeed} />
 	  			<Route path="feed" component={NearbyPeopleFeed}/>
-	  			{/*<Route path="contact" component={Contact}/>*/}
+	  			<Route path="contact" component={Contact}/>
 	  		</Route>
 	  	</Router>
 	  , document.getElementById('root')

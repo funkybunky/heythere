@@ -1,5 +1,6 @@
 /* global ReactMeteorData */
 import React, {Component} from 'react';
+import { Link } from 'react-router';
 import reactMixin from 'react-mixin';
 import BlazeTemplate from './BlazeTemplate';
 import {Users, Posts} from '../collections/index.js';
@@ -28,7 +29,8 @@ export default class App extends Component {
         <h1>Hello Webpack!</h1>
         <p>There are {userCount} users in the Minimongo  (login to change)</p>
         <p>There are {postsCount} posts in the Minimongo  (autopublish removed)</p>
-        <NearbyPeopleFeed/>
+        {/*<Link to="/feed"><button>Go to Feed</button></Link>*/}
+        {this.props.children}
       </div>
     );
   }
