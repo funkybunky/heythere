@@ -7,6 +7,7 @@ import NearbyPeopleFeed from './components/NearbyPeopleFeed/NearbyPeopleFeed.jsx
 import Contact from './components/Contact/Contact.jsx';
 
 import './method_example';
+import "./methods/sendInvite";
 
 
 Accounts.ui.config({
@@ -21,18 +22,18 @@ function requireAuth(nextState, replaceState) {
 }
 
 Meteor.startup(() => {
-	Meteor.subscribe("users", function() {
+	// Meteor.subscribe("users", function() { // don' sub here, do it in the getMeteorData method
 	  ReactDOM.render(
 	  	<Router>
 	  		<Route path="/" component={App} >
 	  			<IndexRoute component={NearbyPeopleFeed} />
 	  			<Route path="feed" component={NearbyPeopleFeed} onEnter={requireAuth} />
-	  			<Route path="contact" component={Contact} onEnter={requireAuth} />
+	  			<Route path="contact/:id" component={Contact} onEnter={requireAuth} />
 	  		</Route>
 	  	</Router>
 	  , document.getElementById('root')
 	  );
-	});
+	// });
 });
 
 // GEOLOCATION
@@ -55,28 +56,9 @@ if ("geolocation" in navigator) {
 // 	console.log(Session.get("loc"));
 // });
 
-// Meteor.setInterval( function() {
 
-	navigator.geolocation.getCurrentPosition(function(position) {
-		let lat = position.coords.latitude;
-		let long = position.coords.longitude;
-	  console.log("lat and long", position.coords.latitude, " ", position.coords.longitude);
-
-	  Meteor.call("updatePosition", lat, long, function(err, res) {
-	  	console.log("updatePosition called");
-	  	if (res) console.log("result: ", res);
-	  });
-	});
-
-// }, 5000);
 
 // ------------------------------------------------
 
-// AUTH
-
-function requireAuth(nextState, replaceState) {
-  // if (!auth.loggedIn())
-  //   replaceState({ nextPathname: nextState.location.pathname }, '/login')
-}
 
 
