@@ -9,6 +9,7 @@ import {List} from "immutable";
 // import "../../lib/ionic/release/css/ionic.css";
 // @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500); -> needs to be in CSS
 import BlazeTemplate from '../BlazeTemplate';
+import sendPosition from "./sendPosition";
 
 // let injectTapEventPlugin = require("react-tap-event-plugin");
 
@@ -28,6 +29,7 @@ export default class NearbyPeopleFeed extends Component {
 		// 	starredPeopleIds: [],	
 		// };
 		// this.handleUserInput = this.handleUserInput.bind(this);
+		sendPosition();
 	}
 	state = {
 		showStarredOnly: false,
@@ -50,18 +52,6 @@ export default class NearbyPeopleFeed extends Component {
 		let receivedInvites = [];
 		let userQuery = Users.findOne(Meteor.userId());
 		console.log("userQuery: ", userQuery);
-		
-		// if (userQuery.nearbyUsers) {
-		// 	people = userQuery.nearbyUsers;
-		// }
-		// if (userQuery.sentInvites) {
-		// 	sentInvites = userQuery.sentInvites;
-		// }
-		// if (userQuery.receivedInvites) {
-		// 	receivedInvites = userQuery.receivedInvites;
-		// }
-
-		// these checks can be become unecessary once I have a schema with default values in place (that sets the stuff to [])
 		
 		return {
 			isLoading: ! handle.ready(),
@@ -92,7 +82,7 @@ export default class NearbyPeopleFeed extends Component {
 
 	}
 	render() {
-		if (this.data.isLoading || this.data.isLoadingOthers) {
+		if (this.data.isLoading || this.data.isLoadingOthers || !this.data.userData.nearbyUsers) {
 			return (
 				<div>App is loading</div>
 			)

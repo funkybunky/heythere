@@ -12,9 +12,10 @@ export default class ContactInfo extends Component {
 	render() {
 		return (
 			<div>
-				You just made friends with {this.props.username}!
+				<div>You just made friends with {this.props.username}!</div>
 				<Link to="/feed"><button>Back to Feed</button></Link>
 				<section>
+					<div>Notes about {this.props.username}:</div>
 					<textarea autofocus="true" ref="notes" onChange={this.handleNotesChange} />
 				</section>
 				<section>

@@ -60,6 +60,7 @@ Meteor.methods({
 				timestamp: methodStartTime,
 			}
 		} });
+		console.log("finished updatePosition");
 		return lat;
 	}
 })

@@ -5,6 +5,7 @@ import { Router, Route, IndexRoute } from 'react-router';
 import App from './components/App.jsx';
 import NearbyPeopleFeed from './components/NearbyPeopleFeed/NearbyPeopleFeed.jsx';
 import Contact from './components/Contact/Contact.jsx';
+import NewContact from './components/Contact/NewContact.jsx';
 import Login from "./components/Login/Login.jsx";
 
 import './method_example';
@@ -42,6 +43,7 @@ Meteor.startup(() => {
 	  			<Route path="login" component={Login} loginCb={handleLogin} />
 	  			<Route path="feed" component={NearbyPeopleFeed} onEnter={requireAuth} />
 	  			<Route path="contact/:id" component={Contact} onEnter={requireAuth} />
+	  			<Route path="contact/new/:id" component={NewContact} onEnter={requireAuth} />
 	  		</Route>
 	  	</Router>
 	  , document.getElementById('root')

@@ -19,6 +19,7 @@ Meteor.publish("friendsData", function() {
 	if (!id) throw new Meteor.Error("logged-out", "Please login to use this function.");
 	// find and select private information from other users
 	let friendIds = Users.findOne(id).connectedWith;
+	console.log("publish fn friendsData for user ", Users.findOne(id).username, " - friendIds: ", friendIds);
 	return Users.find({ _id: { $in: friendIds } }); // TODO: select the info
 });
 
