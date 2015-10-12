@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App.jsx';
-
 import { Router, Route, IndexRoute } from 'react-router';
+
+import App from './components/App.jsx';
 import NearbyPeopleFeed from './components/NearbyPeopleFeed/NearbyPeopleFeed.jsx';
 import Contact from './components/Contact/Contact.jsx';
+import Login from "./components/Login/Login.jsx";
 
 import './method_example';
 import "./methods/sendInvite";
@@ -21,12 +22,24 @@ function requireAuth(nextState, replaceState) {
     replaceState({ nextPathname: nextState.location.pathname }, '/')
 }
 
+function handleLogin() {
+			console.log("logged in! redirect now");
+      // var { location } = this.props
+
+      // if (location.state && location.state.nextPathname) {
+      //   this.history.replaceState(null, location.state.nextPathname)
+      // } else {
+      //   this.history.replaceState(null, '/about')
+      // }	
+}
+
 Meteor.startup(() => {
 	// Meteor.subscribe("users", function() { // don' sub here, do it in the getMeteorData method
 	  ReactDOM.render(
 	  	<Router>
 	  		<Route path="/" component={App} >
 	  			<IndexRoute component={NearbyPeopleFeed} />
+	  			<Route path="login" component={Login} loginCb={handleLogin} />
 	  			<Route path="feed" component={NearbyPeopleFeed} onEnter={requireAuth} />
 	  			<Route path="contact/:id" component={Contact} onEnter={requireAuth} />
 	  		</Route>

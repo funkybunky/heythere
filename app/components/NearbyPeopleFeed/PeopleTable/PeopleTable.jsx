@@ -24,7 +24,7 @@ export default class PeopleTable extends Component {
 			 		starredPeopleIds={this.props.starredPeopleIds}
 			 		sentInvite={this.props.sentInvites.indexOf(user._id)!==-1}
 			 		receivedInvite={this.props.receivedInvites.indexOf(user._id)!==-1}
-
+			 		isConnected={this.props.connectedWith.includes(user._id)}
 			 	/>)
 		, []);
 		return (

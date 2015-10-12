@@ -1,43 +1,28 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import reactMixin from 'react-mixin';
 
-// import "../../methods/acceptInvite";
+import {Users} from "../../collections/index";
+import ContactInfo from "./ContactInfo.jsx";
 
+@reactMixin.decorate(ReactMeteorData)
 export default class Contact extends Component {
-	state = {
-		username: "",
-	}
-	componentDidMount() {
-		// from the path `/contact/:id`
+	getMeteorData() {
 		const contactId = this.props.params.id;
-		// console.log("this: ", this);
-		Meteor.call("acceptInvite", contactId, (err, res) => {
-			if (err) console.log("error while calling acceptInvite: ", err);
-			if (res) {
-				console.log('call to acceptInvite successful!', res);
-				console.log("setState: ", this.setState);
-				this.setState({
-					username: res,
-				});
-			}
-
-		});
-	}
-	handleNotesChange = (e) => {
-		console.log("event from notes change: ", e.target.value);
-
+		console.log("id from param: ", contactId);
+		let friendHandle = Meteor.subscribe("friendsData");
+		return {
+			isLoading: ! friendHandle.ready(),
+			otherUser: Users.findOne(contactId),
+		}
 	}
 	render() {
 		return (
 			<div>
-				You just made friends with {this.state.username}!
-				<Link to="/feed"><button>Back to Feed</button></Link>
-				<section>
-					<textarea autofocus="true" ref="notes" onChange={this.handleNotesChange} />
-				</section>
-				<section>
-					<h3>Contact Info now available for that user:</h3>
-				</section>
+			{this.data.isLoading ? (
+				<div>Loading..</div>	
+			) : (
+				<ContactInfo username={this.data.otherUser.username} />
+			)}
 			</div>
 		)
 	}

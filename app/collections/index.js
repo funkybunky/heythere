@@ -8,7 +8,7 @@ export const NearbyUsers = new Mongo.Collection("nearbyUsers");
 
 // fix to give the dead people some location nearby
 let randomUser = Users.findOne({});
-if (randomUser && !randomUser.lastPosition) {
+if (false) {
   Users.update({}, { $set: { 
     lastPosition: { 
       coords: { 
@@ -28,7 +28,7 @@ Accounts.onCreateUser(function(options, user) {
   user.sentInvites = [];
   user.connectedWith = [];
   user.starredUsers = [];
-  user.skypId = "my skype id :)";
+  user.skypeId = "my skype id :)";
   user.profile = options.profile || {
     name: user.username + ' Richie',
     role: 'Programmer',
@@ -36,6 +36,13 @@ Accounts.onCreateUser(function(options, user) {
   };
   // user.publicFields;
   user.friendFields = [ "username", "skypId", ];
+  user.lastPosition = { 
+    coords: { 
+      latitude: 52.459244, 
+      longitude: 13.527281, 
+    }, 
+    timestamp: Date.now(),
+  };
   return user;
 });  
 }

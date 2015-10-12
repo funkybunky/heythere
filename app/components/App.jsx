@@ -34,13 +34,13 @@ Meteor.call('sayHello', function(err, res) {
 // }, 5000);
 
 
-// @reactMixin.decorate(ReactMeteorData)
+@reactMixin.decorate(ReactMeteorData)
 export default class App extends Component {
-  // getMeteorData() {
-  //   return {
-  //     users: Users.find().fetch()
-  //   };
-  // }
+  getMeteorData() {
+    return {
+      currentUser: Meteor.user(),
+    };
+  }
   // constructor(props) {
   //   super(props);
   // }
@@ -50,21 +50,19 @@ export default class App extends Component {
     // let postsCount = Posts.find().fetch().length;
     return (
       <div className="App">
-        <header>app header</header>
-        { Meteor.userId() ? (
+        <header>app header <BlazeTemplate template={Template.loginButtons} /></header>
+        { this.data.currentUser ? (
           <section>
-            <h1>Hello Webpack!</h1>
-            <BlazeTemplate template={Template.loginButtons} />
+            <h1>Hello, you are logged in as {this.data.currentUser.username}!</h1>
+            
             {/*<Link to="/feed"><button>Go to Feed</button></Link>*/}
             {this.props.children}
-          </section>      
-          ) : (
-            <section>
-              <p>Please Login</p>
-              <BlazeTemplate template={Template.loginButtons} />
-            </section>
-          )
+          </section>
+        ) : (
+          <div>Please Login to see the feed</div>
+        )
         }
+
       </div>
     );
   }

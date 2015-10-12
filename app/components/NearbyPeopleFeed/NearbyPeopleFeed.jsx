@@ -65,6 +65,7 @@ export default class NearbyPeopleFeed extends Component {
 		
 		return {
 			isLoading: ! handle.ready(),
+			isLoadingOthers: ! friendHandle.ready(),
 			userData: userQuery,
 			// people: people,
 			// sentInvites: sentInvites,
@@ -91,7 +92,7 @@ export default class NearbyPeopleFeed extends Component {
 
 	}
 	render() {
-		if (this.data.isLoading) {
+		if (this.data.isLoading || this.data.isLoadingOthers) {
 			return (
 				<div>App is loading</div>
 			)
@@ -112,6 +113,7 @@ export default class NearbyPeopleFeed extends Component {
 					sentInvites={this.data.userData.sentInvites}
 					receivedInvites={this.data.userData.receivedInvites}
 					handleStarring={this.handleStarring}
+					connectedWith={this.data.userData.connectedWith}
 				/>
 			</div>
 		)

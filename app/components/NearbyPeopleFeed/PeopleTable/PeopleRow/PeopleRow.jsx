@@ -23,12 +23,12 @@ export default class PeopleRow extends Component {
 	render() {
 		let connectAction;
 		let contactRoute = "/contact/" + this.props.id;
-		if (this.props.sentInvite) {
+		if (this.props.isConnected) {
+			connectAction = (<div>You are connected to that user. You can <Link createUser={false} to={`/contact/${this.props.id}`}>visit the profile</Link></div>);
+		} else if (this.props.sentInvite) {
 			connectAction = <span>Pending invitation - you sent that user an invitation</span>;
 		} else if (this.props.receivedInvite) {
-			connectAction = <div>You received an invitation: <Link to={contactRoute}><button>Yes, let's connect!</button></Link></div>;
-		/*} else if (this.props.isConnected) {
-			connectAction = (<div>You are connected to that user. You can <Link to="/contact">visit the profile</Link>); */
+			connectAction = <div>You received an invitation: <Link createUser={true} to={contactRoute}><button>Yes, let's connect!</button></Link></div>;
 		} else {
 			connectAction = (<button 
 								className="button button-energized htConnectButton"
