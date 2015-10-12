@@ -3,22 +3,17 @@ export const Users = Meteor.users;
 export const Posts = new Mongo.Collection('posts');
 export const NearbyUsers = new Mongo.Collection("nearbyUsers");
 
-// needed for clinical dead people
-// Users.remove({});
-
-// fix to give the dead people some location nearby
-let randomUser = Users.findOne({});
+// fixes
 if (false) {
   Users.update({}, { $set: { 
-    lastPosition: { 
-      coords: { 
-        latitude: 52.459244, 
-        longitude: 13.527281 
-      }, 
-      timestamp: Date.now()
-    }
-  }
-  }, { multi: true });
+    friendInfos: [{
+      id: "",
+      notes: "",
+      created: Date.now(),
+    },],
+  }},
+  { multi: true });
+  console.log("users updated!");
 }
 
 if (Meteor.isServer) {

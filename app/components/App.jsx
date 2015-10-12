@@ -15,6 +15,8 @@ Meteor.call('sayHello', function(err, res) {
 @reactMixin.decorate(ReactMeteorData)
 export default class App extends Component {
   getMeteorData() {
+    let handle = Meteor.subscribe("userData");
+    let friendHandle = Meteor.subscribe("friendsData");    
     return {
       currentUser: Meteor.user(),
     };
