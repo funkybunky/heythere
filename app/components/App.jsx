@@ -1,15 +1,10 @@
-/* global ReactMeteorData */
+/* global Meteor, ReactMeteorData */
 import React, {Component} from 'react';
 import { Link } from 'react-router';
 import reactMixin from 'react-mixin';
 import BlazeTemplate from './BlazeTemplate';
 import {Users, Posts} from '../collections/index.js';
-import '../method_example';
 import NearbyPeopleFeed from "./NearbyPeopleFeed/NearbyPeopleFeed";
-
-Meteor.call('sayHello', function(err, res) {
-  console.log(res);
-});
 
 
 @reactMixin.decorate(ReactMeteorData)

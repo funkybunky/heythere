@@ -12,9 +12,12 @@ export default class Contact extends Component {
 		let friendHandle = Meteor.subscribe("friendsData", function() {
 			console.log("friendsData ready. otherUser: ", Users.findOne(contactId));
 		});
+		let userHandle = Meteor.subscribe("userData");
 		return {
 			isLoading: ! friendHandle.ready(),
 			otherUser: Users.findOne(contactId),
+			contactId: contactId,
+			notes: Meteor.user().friendInfos[contactId].notes,
 		}
 	}
 	render() {
@@ -23,7 +26,7 @@ export default class Contact extends Component {
 			{!this.data.otherUser ? (
 				<div>Loading..</div>	
 			) : (
-				<ContactInfo username={this.data.otherUser.username} />
+				<ContactInfo id={this.data.contactId} username={this.data.otherUser.username} notes={this.data.notes} />
 			)}
 			</div>
 		)

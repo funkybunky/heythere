@@ -4,13 +4,14 @@ export const Posts = new Mongo.Collection('posts');
 export const NearbyUsers = new Mongo.Collection("nearbyUsers");
 
 // fixes
-if (false) {
+if (Meteor.isServer && false) {
   Users.update({}, { $set: { 
-    friendInfos: [{
-      id: "",
-      notes: "",
-      created: Date.now(),
-    },],
+    friendInfos: {
+      // id: {
+      //   notes: "",
+      //   created: Date.now(),        
+      // },
+    }
   }},
   { multi: true });
   console.log("users updated!");
