@@ -5,19 +5,9 @@ import PeopleTable from "./PeopleTable/PeopleTable";
 import PeopleFilter from "./PeopleFilter/PeopleFilter";
 import {Users} from "../../collections/index";
 import {List} from "immutable";
-// import "../App.scss";
-// import "../../lib/ionic/release/css/ionic.css";
-// @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500); -> needs to be in CSS
+
 import BlazeTemplate from '../BlazeTemplate';
 import sendPosition from "./sendPosition";
-
-// let injectTapEventPlugin = require("react-tap-event-plugin");
-
-//Needed for onTouchTap
-//Can go away when react 1.0 release
-//Check this repo:
-//https://github.com/zilverline/react-tap-event-plugin
-// injectTapEventPlugin();
 
 
 @reactMixin.decorate(ReactMeteorData)

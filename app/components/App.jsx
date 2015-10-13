@@ -6,6 +6,8 @@ import BlazeTemplate from './BlazeTemplate';
 import {Users, Posts} from '../collections/index.js';
 import NearbyPeopleFeed from "./NearbyPeopleFeed/NearbyPeopleFeed";
 
+import "normalize.css";
+import "./App.css";
 
 @reactMixin.decorate(ReactMeteorData)
 export default class App extends Component {
