@@ -31,7 +31,7 @@ export default class App extends Component {
       <div className="App">
         
         <AppBar title="HeyThere!"
-          iconElementRight={<FlatButton><BlazeTemplate template={Template.atNavButton} /></FlatButton>} iconStyleRight={{color: "white"}} 
+          iconElementRight={<FlatButton><BlazeTemplProps template={Template.loginButtons} /></FlatButton>} iconStyleRight={{color: "white"}} 
         />
         
       {/*

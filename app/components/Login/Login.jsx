@@ -38,7 +38,7 @@ export default class Login extends Component {
 		return (
 			<div>
 				Hello to the Login Component
-				<BlazeTemplate template={Template.loginButtons} />
+				<BlazeTemplate template={Template.atForm} />
 			</div>
 		)
 	}
