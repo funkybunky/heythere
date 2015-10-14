@@ -4,7 +4,8 @@ var _ = require('lodash');
 var devProps = require('./devProps');
 
 var config = module.exports = _.assign(_.clone(config), {
-  devtool: 'eval',
+  // devtool: 'eval',
+  devtool: 'cheap-module-eval-source-map', // https://forums.meteor.com/t/webpack-compiler-inside-meteor-es6-modules-hot-reload-and-code-splitting/11264/51?u=funkybunky
   entry: [
     'webpack-dev-server/client?' + devProps.baseUrl,
     'webpack/hot/only-dev-server',

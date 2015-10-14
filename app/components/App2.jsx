@@ -31,7 +31,7 @@ export default class App extends Component {
       <div className="App">
         
         <AppBar title="HeyThere!"
-          iconElementRight={<FlatButton><BlazeTemplProps template={Template.loginButtons} /></FlatButton>} iconStyleRight={{color: "white"}} 
+          iconElementRight={<BlazeTemplProps template={Template.loginButtons} btp-align="right" />} iconStyleRight={{color: "white"}} 
         />
         
       {/*
@@ -51,14 +51,11 @@ export default class App extends Component {
         { this.data.currentUser ? (
           <section>
             <h1>Hello, you are logged in as {this.data.currentUser.username}!</h1>
-            <div><BlazeTemplProps template={Template.atForm} btp-state="signIn" /></div>
-            <button><BlazeTemplate template={Template.atNavButton} />LOGOUT?</button>
-            <div><BlazeTemplProps template={Template.atForm} btp-state="changePwd" /></div>
             {/*<Link to="/feed"><button>Go to Feed</button></Link>*/}
             {this.props.children}
           </section>
         ) : (
-          <div>Please Login to see the feed<BlazeTemplate template={Template.atNavButton} /><BlazeTemplate template={Template.atForm} /></div>
+          <div>Please Login to see the feed</div>
         )
         }
 

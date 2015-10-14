@@ -94,7 +94,7 @@ export default class PeopleRow extends Component {
 let styles = {
 	avatar: {
 		borderRadius: "100%",
-		// width: "100%",
+		maxWidth: "100%",
 		// height: "auto",
 		// width: "100px",
 		// height: "100px",
@@ -105,7 +105,9 @@ let styles = {
 	row: {
 		display: "flex",
 		flexDirection: "row",
-		flexWrap: "wrap",
+		flexWrap: "nowrap",
+		// alignItems: "center",
+		marginBottom: "1em",
 	},
 	column: {
 		display: "flex",
@@ -113,23 +115,23 @@ let styles = {
 		flexWrap: "wrap",
 		alignItems: "flex-end",
 		justifyContent: "space-between",
+		// justifyContent: "center",
 	},
 	item: {
 		flexGrow: 1,
-		flexBasis: "auto",
+		flexBasis: "6em",
+		margin: "auto", // This relies on the fact a margin set to `auto` in a flex container absorb extra space. So setting a vertical margin of auto will make the item perfectly centered in both axis. // https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+		borderRight: "10px solid transparent",
 	},
 	itemCol: {
 		flexGrow: 1,
 		flexBasis: "40px",
 	},
-	item2x: {
-		flexGrow: 2,
-	},
-	item3x: {
-		flexGrow: 3,
-	},
 	item4x: {
 		flexGrow: 4,
+		flexBasis: "8em",
+		margin: "auto",
+		borderRight: "10px solid transparent",
 	},
 	itemAlignTop: {
 		alignSelf: "flex-start",

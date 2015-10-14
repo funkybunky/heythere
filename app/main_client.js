@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute } from 'react-router';
 
-import App from './components/App.jsx';
+import App from './components/App2.jsx';
 import NearbyPeopleFeed from './components/NearbyPeopleFeed/NearbyPeopleFeed.jsx';
 import Contact from './components/Contact/Contact.jsx';
 import NewContact from './components/Contact/NewContact.jsx';
