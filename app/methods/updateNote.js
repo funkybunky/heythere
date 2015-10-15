@@ -19,6 +19,7 @@ Meteor.methods({
 				}				
 			}
 		};
+		// http://stackoverflow.com/questions/30969382/mongodb-object-key-with-es6-template-string
 
 		Users.update(that.userId, { 
 			$set: friendInfo

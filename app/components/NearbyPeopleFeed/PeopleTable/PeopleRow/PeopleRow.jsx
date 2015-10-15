@@ -41,10 +41,12 @@ export default class PeopleRow extends Component {
 			connectAction = <div>You received an invitation: 
 				<Link 
 					to={`/contact/new/${this.props.id}`} 
-					params={ {contactId: this.props.id} } >
+					>
 					<button>Yes, let's connect!</button>
 				</Link>
 			</div>;
+			// http://stackoverflow.com/questions/30115324/pass-props-in-link-react-router
+			// react-router docs: https://github.com/rackt/react-router/blob/master/docs/API.md#link (don't mention params)
 		} else {
 			connectAction = (<button 
 								className="button button-energized htConnectButton"

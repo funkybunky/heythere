@@ -8,10 +8,9 @@ import ContactInfo from "./ContactInfo.jsx";
 export default class Contact extends Component {
 	getMeteorData() {
 		const contactId = this.props.params.id;
-		console.log("id from param: ", contactId);
-		console.log("id from props: ", this.props.contactId);
+		// console.log("id from param: ", contactId);
 		let friendHandle = Meteor.subscribe("friendsData", contactId, function() {
-			console.log("friendsData ready. otherUser: ", Users.findOne(contactId));
+			// console.log("friendsData ready. otherUser: ", Users.findOne(contactId));
 		});
 		let userHandle = Meteor.subscribe("userData");
 		return {
@@ -22,9 +21,9 @@ export default class Contact extends Component {
 		}
 	}
 	render() {
-		console.log("this props: ", this.props);
-		console.log("this props.params.id: ", this.props.params.id);
-		console.log("userData: ", this.data.userData);
+		// console.log("this props: ", this.props);
+		// console.log("this props.params.id: ", this.props.params.id);
+		// console.log("userData: ", this.data.userData);
 		return (
 			<div>
 			{!this.data.isReady ? (

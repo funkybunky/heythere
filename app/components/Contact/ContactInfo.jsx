@@ -22,6 +22,7 @@ export default class ContactInfo extends Component {
 	}
 	handleNotesChange = (e) => {
 		// console.log("event from notes change: ", e.target.value);
+		e.persist();
 		this.delayedCb(this.props.id, e.target.value);
 	}	
 	render() {
@@ -39,8 +40,7 @@ export default class ContactInfo extends Component {
 						defaultValue={this.props.notes}
 						style={[{minHeight: "6em"}]}
 						cols="25"
-					>
-					</textarea>
+					/>
 				</section>
 				<section>
 					<h3>Contact Info now available for that user:</h3>
