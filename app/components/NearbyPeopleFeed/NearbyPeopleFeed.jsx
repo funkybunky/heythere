@@ -11,6 +11,9 @@ import sendPosition from "./sendPosition";
 
 import "../../methods/starUser";
 
+Meteor.setInterval( function() {
+	sendPosition();
+}, 10000);
 
 @reactMixin.decorate(ReactMeteorData)
 export default class NearbyPeopleFeed extends Component {
@@ -42,13 +45,15 @@ export default class NearbyPeopleFeed extends Component {
 		let people = [];
 		let sentInvites = [];
 		let receivedInvites = [];
-		let userQuery = Users.findOne(Meteor.userId());
-		console.log("userQuery: ", userQuery);
+		// let userQuery = Users.findOne(Meteor.userId());
+		// console.log("userQuery: ", userQuery);
 		
 		return {
 			isLoading: ! handle.ready(),
 			// isLoadingOthers: ! friendHandle.ready(),
-			userData: userQuery,
+			// userData: userQuery,
+			userData: Meteor.user(),
+			// nearbyUsers: Meteor.user().nearbyUsers,
 			// people: people,
 			// sentInvites: sentInvites,
 			// receivedInvites: receivedInvites,

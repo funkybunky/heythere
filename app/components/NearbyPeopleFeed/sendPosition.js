@@ -5,11 +5,13 @@ const sendPosition = function sendPosition() {
   function(position) {
     let lat = position.coords.latitude;
     let long = position.coords.longitude;
-    console.log("lat and long", position.coords.latitude, " ", position.coords.longitude);
+    // console.log("lat and long", position.coords.latitude, " ", position.coords.longitude);
 
     Meteor.call("updatePosition", lat, long, function(err, res) {
-      console.log("updatePosition called");
-      if (res) console.log("result: ", res);
+      // console.log("updatePosition called");
+      if (res) {
+        // console.log("result of updatePosition: ", res);
+      }
       if (err) console.log("error while calling updatePosition! ", err);
     });
   }, 

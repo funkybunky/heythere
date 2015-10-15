@@ -8,6 +8,8 @@ import Checkbox from "material-ui/lib/checkbox";
 import ToggleStar from "material-ui/lib/svg-icons/toggle/star";
 import ToggleStarBorder from "material-ui/lib/svg-icons/toggle/star-border";
 
+// import RaisedButton from "material-ui/lib/raised-button";
+
 @Radium
 export default class PeopleRow extends Component {
   static propTypes = {
@@ -34,7 +36,12 @@ export default class PeopleRow extends Component {
 	render() {
 		let connectAction;
 		if (this.props.isConnected) {
-			connectAction = (<div>You are connected to that user. You can <Link to={`/contact/${this.props.id}`}>visit the profile</Link></div>);
+			connectAction = (
+				<div>You are connected to that user. You can
+					<Link to={`/contact/${this.props.id}`}>
+					visit the profile
+					</Link>
+				</div>);
 		} else if (this.props.sentInvite) {
 			connectAction = <span>Pending invitation - you sent that user an invitation</span>;
 		} else if (this.props.receivedInvite) {
@@ -138,7 +145,8 @@ let styles = {
 		flexDirection: "row",
 		flexWrap: "nowrap",
 		// alignItems: "center",
-		marginBottom: "1em",
+		paddingBottom: "1em",
+		// borderBottom: "solid 1px #444";
 	},
 	column: {
 		display: "flex",
@@ -156,7 +164,7 @@ let styles = {
 	},
 	itemCol: {
 		flexGrow: 1,
-		flexBasis: "40px",
+		flexBasis: "50px",
 	},
 	item4x: {
 		flexGrow: 4,

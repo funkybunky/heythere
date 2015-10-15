@@ -16,15 +16,15 @@ Meteor.methods({
 		if (!this.userId) {
 			throw new Meteor.Error("logged-out", "Please login to perform this action.");
 		}
-		console.log("requesting user: ", this.userId);
+		// console.log("requesting user: ", this.userId);
 		let userDoc = Users.findOne(this.userId);
-		console.log("name: ", userDoc.username);
-		console.log("given pos: ", lat, long);
+		// console.log("name: ", userDoc.username);
+		// console.log("given pos: ", lat, long);
 		let otherUsers = Users.find({_id: { $ne: this.userId } }).fetch()
 		let nearbyUsers = otherUsers.reduce( (nearbyUsers, user) => {
 			if (user.lastPosition) {
 				if (!user.username) {
-					console.log("NO USERNAMEZ!");
+					// console.log("NO USERNAMEZ!");
 				} else {
 					// console.log(user.username);
 				}
@@ -60,7 +60,7 @@ Meteor.methods({
 				timestamp: methodStartTime,
 			}
 		} });
-		console.log("finished updatePosition");
+		// console.log("finished updatePosition");
 		return lat;
 	}
 })

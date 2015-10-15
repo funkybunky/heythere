@@ -22,6 +22,7 @@ export default class App extends Component {
     let handle = Meteor.subscribe("userData");
     // let friendHandle = Meteor.subscribe("friendsData");    
     return {
+      isReady: handle.ready(),
       currentUser: Meteor.user(),
     };
   }
@@ -48,7 +49,7 @@ export default class App extends Component {
       */}
        
 
-        { this.data.currentUser ? (
+        { this.data.isReady ? (
           <section>
             <h1>Hello, you are logged in as {this.data.currentUser.username}!</h1>
             {/*<Link to="/feed"><button>Go to Feed</button></Link>*/}
