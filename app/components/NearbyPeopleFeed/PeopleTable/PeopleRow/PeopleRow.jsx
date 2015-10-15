@@ -38,7 +38,13 @@ export default class PeopleRow extends Component {
 		} else if (this.props.sentInvite) {
 			connectAction = <span>Pending invitation - you sent that user an invitation</span>;
 		} else if (this.props.receivedInvite) {
-			connectAction = <div>You received an invitation: <Link to={`/contact/new/${this.props.id}`}><button>Yes, let's connect!</button></Link></div>;
+			connectAction = <div>You received an invitation: 
+				<Link 
+					to={`/contact/new/${this.props.id}`} 
+					params={ {contactId: this.props.id} } >
+					<button>Yes, let's connect!</button>
+				</Link>
+			</div>;
 		} else {
 			connectAction = (<button 
 								className="button button-energized htConnectButton"

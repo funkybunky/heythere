@@ -12,10 +12,16 @@ Meteor.methods({
 		const otherUser = Users.findOne(otherId);
 		if (otherUser.sentInvites.includes(userId)) {
 			const friendInfos = (id) => {return {
-				[id]: {
-					notes: "",
-					created: Date.now()
-				},
+				friendInfos: {
+					[id]: {
+						notes: "",
+						created: Date.now()
+					},
+				}
+				// [id]: {
+				// 	notes: "",
+				// 	created: Date.now()
+				// },
 			} };
 			Users.update(userId, { 
 				$push: { 
@@ -29,6 +35,7 @@ Meteor.methods({
 				},
 				$set: friendInfos(userId),				
 			});
+			console.log("Current User doc after update: ", Users.findOne(userId));
 			// TODO: remove the id out of sentInvites
 		} else {
 			throw new Meteor.Error("not-invited", "You haven't been invited by this user.");

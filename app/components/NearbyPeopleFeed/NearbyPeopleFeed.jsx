@@ -37,7 +37,7 @@ export default class NearbyPeopleFeed extends Component {
 	getMeteorData() {
 		if (!Meteor.userId()) throw new Meteor.Error("logged-out", "Please login to see this page");
 		let handle = Meteor.subscribe("userData");
-		let friendHandle = Meteor.subscribe("friendsData");
+		// let friendHandle = Meteor.subscribe("friendsData");
 
 		let people = [];
 		let sentInvites = [];
@@ -47,7 +47,7 @@ export default class NearbyPeopleFeed extends Component {
 		
 		return {
 			isLoading: ! handle.ready(),
-			isLoadingOthers: ! friendHandle.ready(),
+			// isLoadingOthers: ! friendHandle.ready(),
 			userData: userQuery,
 			// people: people,
 			// sentInvites: sentInvites,
@@ -77,7 +77,7 @@ export default class NearbyPeopleFeed extends Component {
 
 	}
 	render() {
-		if (this.data.isLoading || this.data.isLoadingOthers || !this.data.userData.nearbyUsers) {
+		if (this.data.isLoading) {
 			return (
 				<div>App is loading</div>
 			)

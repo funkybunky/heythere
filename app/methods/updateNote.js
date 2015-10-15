@@ -13,14 +13,18 @@ Meteor.methods({
 		}
 
 		const friendInfo = {
-			[otherId]: {
-				notes: text,
+			friendInfos: {
+				[otherId]: {
+					notes: text,
+				}				
 			}
 		};
 
 		Users.update(that.userId, { 
 			$set: friendInfo
 		});
+
+		console.log("updateNote called. new user doc: ", Users.findOne(that.userId).friendInfos);
 
 		return true;
 	}

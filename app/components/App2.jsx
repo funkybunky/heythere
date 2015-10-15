@@ -20,7 +20,7 @@ import FlatButton from "material-ui/lib/flat-button";
 export default class App extends Component {
   getMeteorData() {
     let handle = Meteor.subscribe("userData");
-    let friendHandle = Meteor.subscribe("friendsData");    
+    // let friendHandle = Meteor.subscribe("friendsData");    
     return {
       currentUser: Meteor.user(),
     };

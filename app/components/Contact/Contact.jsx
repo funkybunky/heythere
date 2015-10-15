@@ -9,24 +9,31 @@ export default class Contact extends Component {
 	getMeteorData() {
 		const contactId = this.props.params.id;
 		console.log("id from param: ", contactId);
-		let friendHandle = Meteor.subscribe("friendsData", function() {
+		console.log("id from props: ", this.props.contactId);
+		let friendHandle = Meteor.subscribe("friendsData", contactId, function() {
 			console.log("friendsData ready. otherUser: ", Users.findOne(contactId));
 		});
 		let userHandle = Meteor.subscribe("userData");
 		return {
-			isLoading: ! friendHandle.ready(),
+			isReady: friendHandle.ready() && userHandle.ready(),
 			otherUser: Users.findOne(contactId),
 			contactId: contactId,
-			notes: Meteor.user().friendInfos[contactId].notes,
+			userData: Meteor.user(),
 		}
 	}
 	render() {
+		console.log("this props: ", this.props);
+		console.log("this props.params.id: ", this.props.params.id);
+		console.log("userData: ", this.data.userData);
 		return (
 			<div>
-			{!this.data.otherUser ? (
+			{!this.data.isReady ? (
 				<div>Loading..</div>	
 			) : (
-				<ContactInfo id={this.data.contactId} username={this.data.otherUser.username} notes={this.data.notes} />
+				<ContactInfo 
+					id={this.data.contactId} 
+					username={this.data.otherUser.username} 
+					notes={this.data.userData.friendInfos[this.props.params.id].notes} />
 			)}
 			</div>
 		)
