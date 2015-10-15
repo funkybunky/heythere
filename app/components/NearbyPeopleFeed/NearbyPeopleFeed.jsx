@@ -9,6 +9,8 @@ import {List} from "immutable";
 import BlazeTemplate from '../BlazeTemplate';
 import sendPosition from "./sendPosition";
 
+import "../../methods/starUser";
+
 
 @reactMixin.decorate(ReactMeteorData)
 export default class NearbyPeopleFeed extends Component {
@@ -59,16 +61,19 @@ export default class NearbyPeopleFeed extends Component {
 	}
 	handleStarring = (userId, isStarred) => {
 		// console.log("handleStarring. userId: ", userId, "isStarred: ", isStarred);
-		let index = this.state.iStarredPeopleIds.indexOf(userId);
-		if (index === -1) {
-			this.setState({
-				iStarredPeopleIds: this.state.iStarredPeopleIds.push(userId),
-			});			
-		} else {
-			this.setState({
-				iStarredPeopleIds: this.state.iStarredPeopleIds.remove(index),
-			});
-		}
+		Meteor.call("starUser", userId, isStarred, function(err, res) {
+			if (err) console.log("error occured while calling starring method. err: ", err);
+		});
+		// let index = this.state.iStarredPeopleIds.indexOf(userId);
+		// if (index === -1) {
+		// 	this.setState({
+		// 		iStarredPeopleIds: this.state.iStarredPeopleIds.push(userId),
+		// 	});			
+		// } else {
+		// 	this.setState({
+		// 		iStarredPeopleIds: this.state.iStarredPeopleIds.remove(index),
+		// 	});
+		// }
 
 	}
 	render() {
@@ -89,7 +94,7 @@ export default class NearbyPeopleFeed extends Component {
 				<PeopleTable 
 					people={this.data.userData.nearbyUsers} 
 					showStarredOnly={this.state.showStarredOnly} 
-					starredPeopleIds={this.state.iStarredPeopleIds}
+					starredPeopleIds={this.data.userData.starredUsers}
 					sentInvites={this.data.userData.sentInvites}
 					receivedInvites={this.data.userData.receivedInvites}
 					handleStarring={this.handleStarring}

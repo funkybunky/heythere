@@ -4,6 +4,10 @@ import ReactDOM from 'react-dom';
 import Radium from "radium";
 import { Link } from 'react-router';
 
+import Checkbox from "material-ui/lib/checkbox";
+import ToggleStar from "material-ui/lib/svg-icons/toggle/star";
+import ToggleStarBorder from "material-ui/lib/svg-icons/toggle/star-border";
+
 @Radium
 export default class PeopleRow extends Component {
   static propTypes = {
@@ -11,10 +15,17 @@ export default class PeopleRow extends Component {
     handleStarring: React.PropTypes.func.isRequired,
     id: React.PropTypes.string.isRequired,
   }
-  localHandleStarring = (e) => {
+  // localHandleStarring = (e) => {
+  // 	this.props.handleStarring(
+  // 		this.props.id,
+  // 		ReactDOM.findDOMNode(this.refs["starCheck"]).checked,
+  // 	);
+  // }
+  muiCheckboxHandler = (e, checked) => {
+  	console.log("star clicked. checked: ", checked);
   	this.props.handleStarring(
   		this.props.id,
-  		ReactDOM.findDOMNode(this.refs["starCheck"]).checked,
+  		checked,
   	);
   }
   handleConnect = (e) => {
@@ -53,6 +64,17 @@ export default class PeopleRow extends Component {
 		<section style={[styles.item]}>
 			<section style={[styles.column]}>
 				<section style={[styles.itemCol]}>
+					<Checkbox
+						name="checkBoxName"
+						value="checkBoxValue"
+						ref="starCheck"
+						label="Star person"
+						onCheck={this.muiCheckboxHandler}
+					  	checkedIcon={<ToggleStar />}
+						unCheckedIcon={<ToggleStarBorder />}
+						defaultChecked={this.props.starredPeopleIds.includes(this.props.id)}	
+					/>
+					{/*
 					<label className="toggle toggle-assertive">
 					 <input 
 					 	type="checkbox" 
@@ -65,6 +87,7 @@ export default class PeopleRow extends Component {
 					   <div className="handle"></div>
 					 </div>
 					</label>
+					*/}
 				</section>
 				<section style={[styles.itemCol]}>
 					{connectAction}

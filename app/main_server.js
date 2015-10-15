@@ -5,6 +5,7 @@ import "./methods/updatePosition";
 import "./methods/sendInvite";
 import "./methods/acceptInvite";
 import "./methods/updateNote";
+import "./methods/starUser";
 
 // these will only run on the sever since we only 'import' them in main_server.js
 

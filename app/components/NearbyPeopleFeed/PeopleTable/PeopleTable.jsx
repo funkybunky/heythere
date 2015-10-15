@@ -5,13 +5,13 @@ export default class PeopleTable extends Component {
 	static propTypes = {
 		people: React.PropTypes.array.isRequired,
 		showStarredOnly: React.PropTypes.bool.isRequired,
-		starredPeopleIds: React.PropTypes.object.isRequired, // is Immutable List and therefore object, not array
+		starredPeopleIds: React.PropTypes.array.isRequired, // is Immutable List and therefore object, not array // not immutable anymore atm
 		handleStarring: React.PropTypes.func.isRequired,
 	}
 	render() {
 		// console.log("people: ", this.props.people);
 		let rows = this.props.people.reduce( (rows, user) =>
-			 (this.props.showStarredOnly && this.props.starredPeopleIds.indexOf(user.username) === -1) 
+			 (this.props.showStarredOnly && !this.props.starredPeopleIds.includes(user._id)) 
 			 ?
 			 rows
 			 :
