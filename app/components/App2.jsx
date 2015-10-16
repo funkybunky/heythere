@@ -7,6 +7,8 @@ import BlazeTemplProps from "./BlazeTemplProps.jsx";
 import {Users, Posts} from '../collections/index.js';
 import NearbyPeopleFeed from "./NearbyPeopleFeed/NearbyPeopleFeed";
 
+import ProfileWrapper from "./EditProfile/ProfileWrapper";
+
 import "normalize.css";
 import "./App.css";
 import AppBar from 'material-ui/lib/app-bar';
@@ -15,6 +17,13 @@ import IconButton from "material-ui/lib/icon-button";
 import MenuItem from "material-ui/lib/menus/menu-item";
 import FlatButton from "material-ui/lib/flat-button";
 
+import LeftNav from "material-ui/lib/left-nav";
+
+const menuItems = [
+  { route: 'get-started', text: 'Get Started' },
+  { route: 'contact/:id', text: 'Customization' },
+  { route: 'components', text: 'Components' },
+];
 
 @reactMixin.decorate(ReactMeteorData)
 export default class App extends Component {
@@ -26,14 +35,22 @@ export default class App extends Component {
       currentUser: Meteor.user(),
     };
   }
+  handleMenuClick = (e) => {
+    e.preventDefault();
+    this.refs.leftNav.toggle();
+  }
 
   render() {
     return (
       <div className="App">
         
         <AppBar title="HeyThere!"
-          iconElementRight={<BlazeTemplProps template={Template.loginButtons} btp-align="right" />} iconStyleRight={{color: "white"}} 
+          iconElementRight={<BlazeTemplProps template={Template.loginButtons} btp-align="right" />} iconStyleRight={{color: "white"}} onLeftIconButtonTouchTap={this.handleMenuClick}
         />
+
+        <LeftNav ref="leftNav" docked={false} menuItems={menuItems} />
+
+        <ProfileWrapper />
         
       {/*
         <AppBar 

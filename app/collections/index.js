@@ -4,16 +4,33 @@ export const Posts = new Mongo.Collection('posts');
 export const NearbyUsers = new Mongo.Collection("nearbyUsers");
 
 // fixes
-if (Meteor.isServer && false) {
-  Users.update({}, { $set: { 
-    friendInfos: {
-      // id: {
-      //   notes: "",
-      //   created: Date.now(),        
-      // },
-    }
-  }},
-  { multi: true });
+if (Meteor.isServer && true) {
+  Users.find({}).fetch().forEach((user)=> {
+    Users.update(user._id, { $set: { 
+      friendData: {
+        lastName: user.profile.name || "Grant",
+        email: user.email || "hugh@grant.com",
+        skype: "my secret skype name",
+      },
+      publicData: {
+        firstName: user.username || "Hugh",
+        profession: user.profile.role || "Rocket Scientist",
+        passion: "cats, chess, bunjee-jumping",
+        avatar: user.profile.avatar || "http://vignette3.wikia.nocookie.net/tooninfo/images/f/f4/Goofy-2.gif/revision/latest?cb=20121111003318",
+      }
+    }});    
+  });
+  // Users.update({}, { $set: { 
+  //   friendData: {
+  //     lastName: "Grant",
+  //     email: "hugh@grant.com",
+  //     skype: "my secret skype name",
+  //   },
+  //   publicData: {
+  //     firstName: 
+  //   }
+  // }},
+  // { multi: true });
   console.log("users updated!");
 }
 

@@ -22,7 +22,7 @@ injectTapEventPlugin();
 
 
 Accounts.ui.config({
-  passwordSignupFields: 'USERNAME_ONLY',
+  passwordSignupFields: 'USERNAME_AND_EMAIL',
 });
 
 console.log('Running on client only');
@@ -48,7 +48,7 @@ Meteor.startup(() => {
 	  ReactDOM.render(
 	  	<Router>
 	  		<Route path="/" component={App} >
-	  			<IndexRoute component={NearbyPeopleFeed} />
+	  			
 	  			<Route path="login" component={Login} loginCb={handleLogin} />
 	  			<Route path="feed" component={NearbyPeopleFeed} onEnter={requireAuth} />
 	  			<Route path="contact/:id" component={Contact} onEnter={requireAuth} />
@@ -59,6 +59,7 @@ Meteor.startup(() => {
 	  );
 	// });
 });
+// <IndexRoute component={NearbyPeopleFeed} />
 
 // GEOLOCATION
 // ------------------------------------------------
