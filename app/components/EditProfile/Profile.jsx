@@ -8,11 +8,19 @@ import "../../methods/changePublicData";
 export default class Profile extends Component {
 	constructor(props) {
 		super(props);
-		this.throttledMethod = _.throttle(function (publicData) {
+		this.throttledMethod = _.throttle((publicData) => {
 				Meteor.call("changePublicData", publicData, function(err, res) {
 					if (err) console.log("err occured during changePublicData: ", err);
+					if (res) {
+						// if (publicData === this.state.publicData) {
+						// 	// need immutable data to do this :)
+						// 	this.setState({
+						// 		isSaved: true,
+						// 	})
+						// }
+					}
 				});
-		}, 5000, { leading: false, trailing: true, } );
+		}, 3000, { leading: false, trailing: true, } );
 		// see: http://stackoverflow.com/questions/23123138/perform-debounce-in-react-js
 	}
 	state = {
@@ -21,13 +29,15 @@ export default class Profile extends Component {
 			profession: this.props.profession,
 			passion: this.props.passion,
 			avatar: this.props.avatar,
-		}
+		},
+		isSaved: true,		
 		// friendData: this.data.friendData,
 	}
 	inputHandler = (publicData) => {
 		console.log("handler called");
 		this.setState({
 			publicData: publicData,
+			isSaved: false,
 		})
 		this.throttledMethod(publicData);
 		// Meteor.call("changePublicData", publicData, (err, res) => {
@@ -40,6 +50,7 @@ export default class Profile extends Component {
 
 			<EditProfile 
 				inputHandler={this.inputHandler}
+				avatarHandler={this.avatarHandler}
 
 				firstName={publicData.firstName}
 				profession={publicData.profession}

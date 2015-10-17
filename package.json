@@ -36,6 +36,8 @@
     "lodash": "^3.10.0",
     "normalize.css": "^3.0.3",
     "react": "^0.14.0-rc1",
+    "react-avatar-cropper": "^0.1.1",
+    "react-bootstrap": "^0.27.1",
     "react-dom": "^0.14.0-rc1",
     "react-mixin": "^2.0.1"
   },

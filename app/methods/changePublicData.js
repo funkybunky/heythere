@@ -5,7 +5,7 @@ Meteor.methods({
 		check(publicData, {
 			firstName: String,
 			profession: String,
-			// avatar: String,
+			avatar: String,
 			passion: String,
 		});
 		let that = this;
