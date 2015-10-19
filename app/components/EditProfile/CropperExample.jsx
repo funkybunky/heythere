@@ -10,7 +10,8 @@ let App = React.createClass({
     return {
       cropperOpen: false,
       img: null,
-      croppedImg: "http://www.fillmurray.com/250/250"
+      // croppedImg: "http://www.fillmurray.com/250/250"
+      croppedImg: this.props.image,
     };
   },
   handleFileChange: function(dataURI) {
@@ -50,8 +51,8 @@ let App = React.createClass({
             cropperOpen={this.state.cropperOpen}
             onCrop={this.handleCrop}
             image={this.state.img}
-            width={250}
-            height={250}
+            width={this.props.imgWidth}
+            height={this.props.imgHeight}
           />
         }
       </div>

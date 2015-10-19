@@ -21,9 +21,10 @@ import FlatButton from "material-ui/lib/flat-button";
 import LeftNav from "material-ui/lib/left-nav";
 
 const menuItems = [
-  { route: 'get-started', text: 'Get Started' },
-  { route: 'contact/:id', text: 'Customization' },
+  // { route: 'get-started', text: 'Get Started' },
+  { route: '/', text: 'Home' },
   { route: '/profile', text: 'Profile' },
+  { route: '/feed', text: 'Feed' },
 ];
 
 console.log("History: ", History);
@@ -44,10 +45,10 @@ class App extends Component {
     this.refs.leftNav.toggle();
   }
   onLeftNavChange = (e, key, payload) => {
-    console.log("THIS: ", this);
-    console.log("this.history", this.history);
-    console.log("this.context: ", this.context);
-    console.log("this.props.routes: ", this.props.routes);
+    // console.log("THIS: ", this);
+    // console.log("this.history", this.history);
+    // console.log("this.context: ", this.context);
+    // console.log("this.props.routes: ", this.props.routes);
     // this.context.router.transitionTo(payload.route);
     this.context.history.pushState(null, payload.route);
   }
@@ -101,3 +102,4 @@ class App extends Component {
 
 App.contextTypes = { history: PropTypes.history };
 export default App;
+// https://github.com/rackt/react-router/blob/master/docs/API.md#but-im-using-classes

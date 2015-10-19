@@ -85,8 +85,13 @@ export default class EditProfile extends Component {
 				</label>
 				<br />
 				{/*<input type="submit" value="Post" />*/}
-				<img src={this.state.imgSrc} />
-				<EditAvatar getImage={this.avatarHandler} />
+				<label>Avatar:
+				{/*
+					<p>Existing profile picture:</p>
+					<img src={this.state.imgSrc} />
+				*/}
+					<EditAvatar getImage={this.avatarHandler} image={this.state.imgSrc} imgWidth="200" imgHeight="200" />
+				</label>
 			</form>
 		</section>
 		)
