@@ -1,7 +1,8 @@
 /* global Meteor, ReactMeteorData */
 import React, {Component} from 'react';
-import { Link } from 'react-router';
+import { Link, PropTypes } from 'react-router';
 import reactMixin from 'react-mixin';
+
 import BlazeTemplate from './BlazeTemplate';
 import BlazeTemplProps from "./BlazeTemplProps.jsx";
 import {Users, Posts} from '../collections/index.js';
@@ -22,11 +23,14 @@ import LeftNav from "material-ui/lib/left-nav";
 const menuItems = [
   { route: 'get-started', text: 'Get Started' },
   { route: 'contact/:id', text: 'Customization' },
-  { route: 'components', text: 'Components' },
+  { route: '/profile', text: 'Profile' },
 ];
 
+console.log("History: ", History);
+
 @reactMixin.decorate(ReactMeteorData)
-export default class App extends Component {
+@reactMixin.decorate(History)
+class App extends Component {
   getMeteorData() {
     let handle = Meteor.subscribe("userData");
     // let friendHandle = Meteor.subscribe("friendsData");    
@@ -39,6 +43,14 @@ export default class App extends Component {
     e.preventDefault();
     this.refs.leftNav.toggle();
   }
+  onLeftNavChange = (e, key, payload) => {
+    console.log("THIS: ", this);
+    console.log("this.history", this.history);
+    console.log("this.context: ", this.context);
+    console.log("this.props.routes: ", this.props.routes);
+    // this.context.router.transitionTo(payload.route);
+    this.context.history.pushState(null, payload.route);
+  }
 
   render() {
     return (
@@ -48,9 +60,14 @@ export default class App extends Component {
           iconElementRight={<BlazeTemplProps template={Template.loginButtons} btp-align="right" />} iconStyleRight={{color: "white"}} onLeftIconButtonTouchTap={this.handleMenuClick}
         />
 
-        <LeftNav ref="leftNav" docked={false} menuItems={menuItems} />
+        <LeftNav 
+          ref="leftNav" 
+          docked={false} 
+          menuItems={menuItems}
+          onChange={this.onLeftNavChange}
+        />
 
-        <ProfileWrapper />
+        
         
       {/*
         <AppBar 
@@ -81,3 +98,6 @@ export default class App extends Component {
     );
   }
 }
+
+App.contextTypes = { history: PropTypes.history };
+export default App;
