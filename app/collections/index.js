@@ -4,7 +4,7 @@ export const Posts = new Mongo.Collection('posts');
 export const NearbyUsers = new Mongo.Collection("nearbyUsers");
 
 // fixes
-if (Meteor.isServer && true) {
+if (Meteor.isServer && false) {
   Users.find({}).fetch().forEach((user)=> {
     Users.update(user._id, { $set: { 
       friendData: {

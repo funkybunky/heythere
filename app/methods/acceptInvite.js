@@ -12,7 +12,7 @@ Meteor.methods({
 		const otherUser = Users.findOne(otherId);
 		if (otherUser.sentInvites.includes(userId)) {
 			
-			let oldFriendInfos = Users.findOne(userId).friendInfos;
+			let oldFriendInfos = Users.findOne(userId).friendData;
 			oldFriendInfos[otherId] = {
 				notes: "",
 				created: Date.now(),
@@ -21,10 +21,12 @@ Meteor.methods({
 				$push: { 
 					connectedWith: otherId 
 				}, 
-				$set: oldFriendInfos,
+				$set: { 
+					friendData: oldFriendInfos,
+				},
 			});
 
-			oldFriendInfos = Users.findOne(otherId).friendInfos;
+			oldFriendInfos = Users.findOne(otherId).friendData;
 			oldFriendInfos[userId] = {
 				notes: "",
 				created: Date.now(),
@@ -33,7 +35,9 @@ Meteor.methods({
 				$push: { 
 					connectedWith: userId 
 				},
-				$set: oldFriendInfos,				
+				$set: { 
+					friendData: oldFriendInfos,
+				},				
 			});
 			// console.log("Current User doc after update: ", Users.findOne(userId));
 			// TODO: remove the id out of sentInvites

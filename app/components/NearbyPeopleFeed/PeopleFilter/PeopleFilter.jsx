@@ -26,6 +26,7 @@ export default class PeopleFilter extends Component {
 					label="Only show starred people"
 					defaultToggled={this.props.showStarredOnly}
 					onToggle={this.muiToggleHandler}
+					labelPosition={"right"}
 				/>
 				{/*
 				<p>

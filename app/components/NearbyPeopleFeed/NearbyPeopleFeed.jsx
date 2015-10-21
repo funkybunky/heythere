@@ -84,7 +84,7 @@ export default class NearbyPeopleFeed extends Component {
 	render() {
 		if (this.data.isLoading) {
 			return (
-				<div>App is loading</div>
+				<div>Loading..</div>
 			)
 		}
 		return (

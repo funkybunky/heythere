@@ -13,11 +13,16 @@ export default class Contact extends Component {
 			// console.log("friendsData ready. otherUser: ", Users.findOne(contactId));
 		});
 		let userHandle = Meteor.subscribe("userData");
+		let user = Meteor.user();
+		let notes = user.friendData && user.friendData[contactId] && user.friendData[contactId].notes;
+		if (!user.connectedWith.includes(contactId)) throw new Error("You must be friends with that person");
+		if (!notes) throw new Error("notes undefined!");
 		return {
 			isReady: friendHandle.ready() && userHandle.ready(),
 			otherUser: Users.findOne(contactId),
 			contactId: contactId,
-			userData: Meteor.user(),
+			// userData: Meteor.user(),
+			notes: notes,
 		}
 	}
 	render() {
@@ -32,7 +37,7 @@ export default class Contact extends Component {
 				<ContactInfo 
 					id={this.data.contactId} 
 					username={this.data.otherUser.username} 
-					notes={this.data.userData.friendInfos[this.props.params.id].notes} />
+					notes={this.data.notes} />
 			)}
 			</div>
 		)

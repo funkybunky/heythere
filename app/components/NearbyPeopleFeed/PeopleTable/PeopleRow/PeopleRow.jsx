@@ -8,7 +8,7 @@ import Checkbox from "material-ui/lib/checkbox";
 import ToggleStar from "material-ui/lib/svg-icons/toggle/star";
 import ToggleStarBorder from "material-ui/lib/svg-icons/toggle/star-border";
 
-// import RaisedButton from "material-ui/lib/raised-button";
+import RaisedButton from "material-ui/lib/raised-button";
 
 @Radium
 export default class PeopleRow extends Component {
@@ -37,30 +37,24 @@ export default class PeopleRow extends Component {
 		let connectAction;
 		if (this.props.isConnected) {
 			connectAction = (
-				<div>You are connected to that user. You can
-					<Link to={`/contact/${this.props.id}`}>
-					visit the profile
-					</Link>
-				</div>);
+				<div><p>You are connected to that user</p>
+				<RaisedButton containerElement={<Link to={`/contact/${this.props.id}`} />} label="visit profile" />
+				</div>
+			)
 		} else if (this.props.sentInvite) {
-			connectAction = <span>Pending invitation - you sent that user an invitation</span>;
+			connectAction = <p>Pending invitation - you sent that user an invitation</p>;
 		} else if (this.props.receivedInvite) {
-			connectAction = <div>You received an invitation: 
-				<Link 
-					to={`/contact/new/${this.props.id}`} 
-					>
-					<button>Yes, let's connect!</button>
-				</Link>
-			</div>;
 			// http://stackoverflow.com/questions/30115324/pass-props-in-link-react-router
 			// react-router docs: https://github.com/rackt/react-router/blob/master/docs/API.md#link (don't mention params)
+			connectAction = (
+				<div><p>You received an invitation</p>
+					<RaisedButton containerElement={<Link to={`/contact/new/${this.props.id}`} />} label="Connect!" />
+				</div>
+			)
 		} else {
-			connectAction = (<button 
-								className="button button-energized htConnectButton"
-								onClick={this.handleConnect}
-							>
-								Send invitation!
-							</button>);
+			connectAction = (
+				<RaisedButton label="Connect!" onClick={this.handleConnect} />
+			)
 		}
 
 		return (
@@ -106,20 +100,6 @@ export default class PeopleRow extends Component {
 				</section>
 				<section style={[styles.itemCol]}>
 					{connectAction}
-				{/*
-					{ this.props.sentInvite ? (
-							<div>Pending invitation - you sent that user an invitation</div>
-						) : (
-							<button 
-								className="button button-energized htConnectButton"
-								onClick={this.handleConnect}
-							>
-								Connect!
-							</button>
-						)
-					}				
-						<Link to="/contact"><button>Create Contact!</button></Link>
-				*/}
 				</section>
 			</section>
 		</section>
@@ -152,13 +132,13 @@ let styles = {
 		display: "flex",
 		flexDirection: "column",
 		flexWrap: "wrap",
-		alignItems: "flex-end",
+		// alignItems: "flex-end",
 		justifyContent: "space-between",
 		// justifyContent: "center",
 	},
 	item: {
 		flexGrow: 1,
-		flexBasis: "6em",
+		flexBasis: "4em",
 		margin: "auto", // This relies on the fact a margin set to `auto` in a flex container absorb extra space. So setting a vertical margin of auto will make the item perfectly centered in both axis. // https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 		borderRight: "10px solid transparent",
 	},
@@ -167,8 +147,8 @@ let styles = {
 		flexBasis: "50px",
 	},
 	item4x: {
-		flexGrow: 4,
-		flexBasis: "8em",
+		flexGrow: 2,
+		flexBasis: "6em",
 		margin: "auto",
 		borderRight: "10px solid transparent",
 	},
