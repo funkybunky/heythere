@@ -5,6 +5,8 @@ import React from "react";
 import ReactDom from "react-dom";
 import AvatarCropper from "react-avatar-cropper";
 
+// import "font-awesome/css/font-awesome.min.css";
+
 let App = React.createClass({
   getInitialState: function() {
     return {
