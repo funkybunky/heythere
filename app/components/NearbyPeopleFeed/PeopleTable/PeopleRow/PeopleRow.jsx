@@ -15,7 +15,11 @@ export default class PeopleRow extends Component {
   static propTypes = {
     profile: React.PropTypes.object.isRequired,
     handleStarring: React.PropTypes.func.isRequired,
-    id: React.PropTypes.string.isRequired,
+    id: React.PropTypes.string.isRequired, // mongo id of corresponding user
+    isStarred: React.PropTypes.bool.isRequired,
+    isConnected: React.PropTypes.bool.isRequired,
+    sentInvite: React.PropTypes.bool.isRequired,
+    receivedInvite: React.PropTypes.bool.isRequired,
   }
   // localHandleStarring = (e) => {
   // 	this.props.handleStarring(
@@ -23,6 +27,12 @@ export default class PeopleRow extends Component {
   // 		ReactDOM.findDOMNode(this.refs["starCheck"]).checked,
   // 	);
   // }
+  shouldComponentUpdate(nextProps, nextState) {
+  	return this.props.isStarred !== nextProps.isStarred ||
+  		this.props.isConnected !== nextProps.isConnected ||
+  		this.props.sentInvite !== nextProps.sentInvite ||
+  		this.props.receivedInvite !== nextProps.receivedInvite;
+  }
   muiCheckboxHandler = (e, checked) => {
   	console.log("star clicked. checked: ", checked);
   	this.props.handleStarring(
@@ -81,7 +91,7 @@ export default class PeopleRow extends Component {
 						onCheck={this.muiCheckboxHandler}
 					  	checkedIcon={<ToggleStar />}
 						unCheckedIcon={<ToggleStarBorder />}
-						defaultChecked={this.props.starredPeopleIds.includes(this.props.id)}	
+						defaultChecked={this.props.isStarred}	
 					/>
 					{/*
 					<label className="toggle toggle-assertive">

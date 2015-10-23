@@ -56,6 +56,17 @@ Accounts.onCreateUser(function(options, user) {
     }, 
     timestamp: Date.now(),
   };
+  user.friendData = {
+    lastName: user.profile.name || "Grant",
+    email: user.email || "hugh@grant.com",
+    skype: "my secret skype name",
+  };
+  user.publicData = {
+    firstName: user.username || "Hugh",
+    profession: user.profile.role || "Rocket Scientist",
+    passion: "cats, chess, bunjee-jumping",
+    avatar: user.profile.avatar || "http://vignette3.wikia.nocookie.net/tooninfo/images/f/f4/Goofy-2.gif/revision/latest?cb=20121111003318",
+  }; 
   return user;
 });  
 }
