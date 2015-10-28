@@ -31,7 +31,7 @@ export default class Profile extends Component {
 			avatar: this.props.avatar,
 		},
 		isSaved: true,		
-		// friendData: this.data.friendData,
+		// privateData: this.data.privateData,
 	}
 	inputHandler = (publicData) => {
 		console.log("handler called");

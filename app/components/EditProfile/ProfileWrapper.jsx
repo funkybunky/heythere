@@ -8,10 +8,10 @@ import Profile from "./Profile";
 export default class ProfileWrapper extends Component {
 	getMeteorData() {
 		const publicData = Meteor.user().publicData;
-		const friendData = Meteor.user().friendData;
+		const privateData = Meteor.user().privateData;
 		return {
 			publicData: publicData,
-			friendData: friendData,
+			privateData: privateData,
 		}
 	}
 

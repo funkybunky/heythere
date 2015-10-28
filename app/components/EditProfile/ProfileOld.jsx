@@ -9,15 +9,15 @@ import "../../methods/changePublicData";
 export default class Profile extends Component {
 	getMeteorData() {
 		const publicData = Meteor.user().publicData;
-		const friendData = Meteor.user().friendData;
+		const privateData = Meteor.user().privateData;
 		return {
 			publicData: publicData,
-			friendData: friendData,
+			privateData: privateData,
 		}
 	}
 	state = {
 		publicData: this.data.publicData,
-		friendData: this.data.friendData,
+		privateData: this.data.privateData,
 	}
 	inputHandler = (publicData) => {
 		console.log("handler called");

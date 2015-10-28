@@ -12,7 +12,7 @@ Meteor.methods({
 			throw new Meteor.Error("logged-out", "You need to be logged in to perform this action.");
 		}
 
-		let oldFriendInfo = Users.findOne(that.userId).friendData;
+		let oldFriendInfo = Users.findOne(that.userId).friendNotes;
 		console.log("oldFriendInfo: ", oldFriendInfo);
 
 		if (!oldFriendInfo[otherId]) {
@@ -25,10 +25,10 @@ Meteor.methods({
 		// http://stackoverflow.com/questions/30969382/mongodb-object-key-with-es6-template-string
 
 		Users.update(that.userId, { 
-			$set: { friendData: oldFriendInfo }
+			$set: { friendNotes: oldFriendInfo }
 		});
 
-		// console.log("updateNote called. new user doc: ", Users.findOne(that.userId).friendData);
+		// console.log("updateNote called. new user doc: ", Users.findOne(that.userId).friendNotes);
 
 		return true;
 	}

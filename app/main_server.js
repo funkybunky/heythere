@@ -17,7 +17,7 @@ Meteor.publish("userData", function() {
 	return Users.find(id);
 });
 
-Meteor.publish("friendsData", function(otherId) {
+Meteor.publish("getPrivateUserData", function(otherId) {
 	check(otherId, String);
 
 	const id = this.userId;
@@ -27,14 +27,14 @@ Meteor.publish("friendsData", function(otherId) {
 	if (!friendIds.includes(otherId)) {
 		throw new Meteor.Error("not-friends", "You have to be friends in order to view contact info for that user.");
 	}
-	console.log("publish fn friendsData for user ", Users.findOne(id).username, " - friendIds: ", friendIds);
+	console.log("publish fn getPrivateUserData for user ", Users.findOne(id).username, " - friendIds: ", friendIds);
 	
 	// return Users.find({ _id: { $in: friendIds } });	// TODO: select the info
 	const cursor = Users.find(otherId);
 	if (!cursor || cursor.count()===0) {
 		throw new Error("cursor is undefined, sth went really wrong!");
 	} else {
-		console.log("fetched user: ", cursor.fetch().username);
+		console.log("fetched user: ", cursor.fetch());
 	}
 	return cursor;
 });

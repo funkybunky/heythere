@@ -7,7 +7,7 @@ export const NearbyUsers = new Mongo.Collection("nearbyUsers");
 if (Meteor.isServer && false) {
   Users.find({}).fetch().forEach((user)=> {
     Users.update(user._id, { $set: { 
-      friendData: {
+      privateData: {
         lastName: user.profile.name || "Grant",
         email: user.email || "hugh@grant.com",
         skype: "my secret skype name",
@@ -21,7 +21,7 @@ if (Meteor.isServer && false) {
     }});    
   });
   // Users.update({}, { $set: { 
-  //   friendData: {
+  //   privateData: {
   //     lastName: "Grant",
   //     email: "hugh@grant.com",
   //     skype: "my secret skype name",
@@ -56,7 +56,10 @@ Accounts.onCreateUser(function(options, user) {
     }, 
     timestamp: Date.now(),
   };
-  user.friendData = {
+  user.friendNotes = {
+    // friendId: {}
+  };
+  user.privateData = {
     lastName: user.profile.name || "Grant",
     email: user.email || "hugh@grant.com",
     skype: "my secret skype name",
