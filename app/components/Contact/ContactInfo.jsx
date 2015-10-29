@@ -19,13 +19,23 @@ export default class ContactInfo extends Component {
 		id: React.PropTypes.string.isRequired,
 		username: React.PropTypes.string.isRequired,
 		notes: React.PropTypes.string.isRequired,
+		friendData: React.PropTypes.object.isRequired, // data that the other user wants to share with friends only (mostly contact info, mail, skype etc)
 	}
 	handleNotesChange = (e) => {
 		// console.log("event from notes change: ", e.target.value);
 		e.persist();
 		this.delayedCb(this.props.id, e.target.value);
-	}	
+	}
 	render() {
+		const friendData = this.props.friendData;
+		const friendJsx = Object.keys(friendData).map((contactProp) => {
+			return (
+				<div>
+					<h4>{contactProp}</h4>
+					<p>{friendData[contactProp]}</p>
+				</div>
+			)
+		});
 		return (
 			<div>
 				<div>You just made friends with {this.props.username}!</div>
@@ -44,6 +54,7 @@ export default class ContactInfo extends Component {
 				</section>
 				<section>
 					<h3>Contact Info now available for that user:</h3>
+					{friendJsx}
 				</section>
 			</div>
 		)	

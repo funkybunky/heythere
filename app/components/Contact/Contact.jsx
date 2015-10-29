@@ -48,7 +48,9 @@ export default class Contact extends Component {
 				<ContactInfo 
 					id={this.data.contactId} 
 					username={this.data.otherUser.username} 
-					notes={this.data.userData.friendNotes[contactId].notes} />
+					notes={this.data.userData.friendNotes[contactId].notes}
+					friendData={this.data.otherUser.privateData}
+				/>
 			)}
 			</div>
 		)
