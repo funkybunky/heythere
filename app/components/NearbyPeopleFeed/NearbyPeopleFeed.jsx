@@ -39,7 +39,11 @@ export default class NearbyPeopleFeed extends Component {
 	}*/	
 	getMeteorData() {
 		if (!Meteor.userId()) throw new Meteor.Error("logged-out", "Please login to see this page");
-		let handle = Meteor.subscribe("userData");
+		let handle = Meteor.subscribe("userData", () => {
+			// this.setState({
+			// 	showStarredOnly: Meteor.user(). // prop doesnt exist yet
+			// })
+		});
 		// let friendHandle = Meteor.subscribe("friendsData");
 
 		let people = [];

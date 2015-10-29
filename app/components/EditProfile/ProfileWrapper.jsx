@@ -7,9 +7,13 @@ import Profile from "./Profile";
 @reactMixin.decorate(ReactMeteorData)
 export default class ProfileWrapper extends Component {
 	getMeteorData() {
+		let userHandle = Meteor.subscribe("userData");
+
 		const publicData = Meteor.user().publicData;
 		const privateData = Meteor.user().privateData;
+
 		return {
+			isReady: userHandle.ready(),
 			publicData: publicData,
 			privateData: privateData,
 		}
@@ -25,6 +29,7 @@ export default class ProfileWrapper extends Component {
 				passion={publicData.passion}
 				avatar={publicData.avatar}
 
+				privateData={this.data.privateData}
 			/>
 		)
 	}

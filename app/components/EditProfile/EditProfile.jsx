@@ -39,6 +39,11 @@ export default class EditProfile extends Component {
 			profession: ReactDOM.findDOMNode(this.refs["profession"]).value,
 			passion: ReactDOM.findDOMNode(this.refs["passion"]).value,
 			avatar: this.state.imgSrc,
+		},
+		{
+			lastName: ReactDOM.findDOMNode(this.refs["lastName"]).value,
+			mail: ReactDOM.findDOMNode(this.refs["mail"]).value,
+			skypeId: ReactDOM.findDOMNode(this.refs["skypeId"]).value,
 		});
 	}
 	avatarHandler = (dataUrl) => {
@@ -93,6 +98,41 @@ export default class EditProfile extends Component {
 					<EditAvatar getImage={this.avatarHandler} image={this.state.imgSrc} imgWidth="200" imgHeight="200" />
 				</label>
 			</form>
+
+			<h3>Contact data</h3>
+			<p>This data is visible only to your confirmed contacts</p>
+			<p>Your input is saved as you type</p>
+			<form>
+				<label>Last Name: 
+					<input 
+						type="text" 
+						placeholder="Jackson" 
+						value={this.props.privateData.lastName} 
+						onChange={this.handleChange}
+						ref="lastName"
+					/>
+				</label>
+				<br />
+				<label>Mail: 
+					<input 
+						type="text" 
+						placeholder="jack@jackson.com" 
+						value={this.props.privateData.mail} 
+						onChange={this.handleChange}
+						ref="mail"
+					/>
+				</label>
+				<br />
+				<label>Skype Id:
+					<input 
+						type="text" 
+						value={this.props.privateData.skypeId} 
+						onChange={this.handleChange} 
+						ref="skypeId"
+					/>
+				</label>
+			</form>
+
 		</section>
 		)
 	}

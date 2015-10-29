@@ -1,13 +1,19 @@
 import { Users } from "../collections/index";
 
 Meteor.methods({
-	changePublicData(publicData) {
+	changePublicData(publicData, privateData) {
 		check(publicData, {
 			firstName: String,
 			profession: String,
 			avatar: String,
 			passion: String,
 		});
+		check(privateData, {
+			lastName: String,
+			mail: String,
+			skypeId: String,
+		});
+
 		let that = this;
 
 		if (!this.userId) {
@@ -18,7 +24,10 @@ Meteor.methods({
 			console.log("changePublicData on client run");
 		}
 
-		Users.update(that.userId, { $set: { publicData: publicData } });
+		Users.update(that.userId, { $set: { 
+			publicData: publicData,
+			privateData: privateData,
+		} });
 
 		return true;
 	}
