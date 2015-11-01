@@ -2,28 +2,32 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
-import Formsy from "formsy-react";
-import { FormsyCheckbox, FormsyDate, FormsyRadio, FormsyRadioGroup, FormsySelect, FormsyText, FormsyTime, FormsyToggle } from "formsy-material-ui";
+// import Formsy from "formsy-react";
+const FMUI = require('formsy-material-ui');
+const { FormsyCheckbox, FormsyDate, FormsyRadio, FormsyRadioGroup, FormsySelect, FormsyText, FormsyTime, FormsyToggle } = FMUI;
+
+// import { FormsyCheckbox, FormsyDate, FormsyRadio, FormsyRadioGroup, FormsySelect, FormsyText, FormsyTime, FormsyToggle } from "formsy-material-ui";
 
 import TextField from "material-ui/lib/text-field";
 import DatePicker from "material-ui/lib/date-picker/date-picker";
 import TimePicker from "material-ui/lib/time-picker";
 import RaisedButton from "material-ui/lib/raised-button";
 
-export default class CreateEvent extends Component {
+let CreateEvent = React.createClass({
 
-	static propTypes = {
-		// name: React.PropTypes.string.isRequired,
-		// startsAt: React.PropTypes.object.isRequired,
-		// endsAt: React.PropTypes.object.isRequired,
-		// location: React.PropTypes.string.isRequired,
+	// static propTypes = {
+	// 	// name: React.PropTypes.string.isRequired,
+	// 	// startsAt: React.PropTypes.object.isRequired,
+	// 	// endsAt: React.PropTypes.object.isRequired,
+	// 	// location: React.PropTypes.string.isRequired,
 
-		errorMessage: React.PropTypes.string.isRequired,
+	// 	errorMessage: React.PropTypes.string.isRequired,
 
-		inputHandler: React.PropTypes.func.isRequired,
-	}
+	// 	inputHandler: React.PropTypes.func.isRequired,
+	// }
 
-	state = {
+	getInitialState: function() {
+		return {
 			name: "",
 			// startsAt: new Date(),
 			// endsAt: new Date(),
@@ -33,26 +37,27 @@ export default class CreateEvent extends Component {
 			location: "",
 			isSubmitting: false,
 			canSubmit: false,
-	}
+		}
+	},
 
-  errorMessages = {
+  errorMessages: {
     wordsError: "Please only use letters",
     title: "Please provide a title",
-  }
+  },
 
-  enableButton = () => {
+  enableButton: function() {
     this.setState({
       canSubmit: true
     });
-  }
+  },
 
-  disableButton = () => {
+  disableButton: function() {
     this.setState({
       canSubmit: false
     });
-  }
+  },
 
-	onSubmitFormOld = () => {
+	onSubmitFormOld: () => {
 		const name = this.refs["name"].getValue();
 		const date = this.refs["date"].getDate();
 		const startTime = this.refs["startTime"].getTime();
@@ -68,16 +73,31 @@ export default class CreateEvent extends Component {
 			endsAt,
 			location,
 		});
-	}
+	},
 
-	submitForm = (data) => {
+	submitForm: (data) => {
 		console.log("Model: ", data);
 		// call inputHandler
-	}
+	},
+
+	validateText: () => {
+		return true;
+	},
 
 	render() {
 		return (
 		<section>
+
+			<label>Title: 
+				<TextField
+					required={true}
+					validations={this.validateText}
+				  hintText="Cat Lover Meetup"
+				  ref="bla"
+				  errorText="The error text can be as long as you want, it will wrap."
+				/>
+			</label>
+			<br />
 			<Formsy.Form
         onValid={this.enableButton}
         onInvalid={this.disableButton}
@@ -129,8 +149,9 @@ export default class CreateEvent extends Component {
 		</section>
 		)
 	}
-}
+});
 
+export default CreateEvent;
 
 			// <label>Title: 
 			// 	<TextField

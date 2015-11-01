@@ -1,4 +1,5 @@
 import {Posts, Users} from '../app/collections';
+import { Events } from "collections/Events";
 
 import "./publications/events";
 

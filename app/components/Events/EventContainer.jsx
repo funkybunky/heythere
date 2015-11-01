@@ -35,27 +35,18 @@ export default class EventContainer extends Component {
 			joinedEventAt = Meteor.user().currentEvent.signedInAt;
 		});
 
-		const fakeEvents = [
-			{
-				name: "Meteor meetup",
-				location: "co.up",
-				startsAt: new Date(2015, 11, 28, 19),
-				endsAt: new Date(2015, 11, 28, 21),
-				_id: "adcewc",
-			},
-			{
-				name: "4HWW meetup",
-				location: "betahaus",
-				startsAt: new Date(2015, 11, 25, 18),
-				endsAt: new Date(2015, 11, 25, 20),
-				_id: "blabla",
-			},
-		];
+		const searchRegExp = new RegExp(this.state.searchString, "gi");
+		const queryObj = {
+			"$or": [
+				{ "name": { $regex: searchRegExp } },
+				{ "location": { $regex: searchRegExp } },
+			],
+		};
 
 		return {
 			isReady: eventHandle.ready() && userHandle.ready(),
-			// todaysEvents: Events.find(/*{startsAt: }*/).fetch(),
-			todaysEvents: fakeEvents,
+			todaysEvents: Events.find(queryObj/*{startsAt: }*/).fetch(),
+			// todaysEvents: fakeEvents,
 			currentEventId,
 			joinedEventAt,
 		}
