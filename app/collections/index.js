@@ -36,6 +36,10 @@ if (Meteor.isServer && false) {
 
 if (Meteor.isServer) {
 Accounts.onCreateUser(function(options, user) {
+  user.currentEvent = {
+    eventId: "",
+    // signedInAt: new Date.now(),
+  },
   user.nearbyUsers = [];
   user.receivedInvites = [];
   user.sentInvites = [];

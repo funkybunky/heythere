@@ -1,5 +1,7 @@
 import {Posts, Users} from '../app/collections';
 
+import "./publications/events";
+
 // we don't call this so we're just importing to initialize file
 import "./methods/updatePosition";
 import "./methods/sendInvite";
@@ -7,6 +9,7 @@ import "./methods/acceptInvite";
 import "./methods/updateNote";
 import "./methods/starUser";
 import "./methods/changePublicData";
+import "./methods/createEvent";
 
 // these will only run on the sever since we only 'import' them in main_server.js
 
@@ -42,5 +45,4 @@ Meteor.publish("getPrivateUserData", function(otherId) {
 console.log('\n\nRunning on server only');
 console.log('There are # posts:', Posts.find().fetch().length);
 console.log("number of users: ", Users.find().count());
-
 

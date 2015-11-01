@@ -9,6 +9,7 @@ import Contact from './components/Contact/Contact.jsx';
 import NewContact from './components/Contact/NewContact.jsx';
 import Login from "./components/Login/Login.jsx";
 import ProfileWrapper from "./components/EditProfile/ProfileWrapper";
+import EventContainer from "./components/Events/EventContainer";
 
 import './method_example';
 import "./methods/sendInvite";
@@ -56,6 +57,7 @@ Meteor.startup(() => {
 	  			<Route path="contact/:id" component={Contact} onEnter={requireAuth} />
 	  			<Route path="contact/new/:id" component={NewContact} onEnter={requireAuth} />
 	  			<Route path="profile" component={ProfileWrapper} />
+	  			<Route path="events" component={EventContainer} />
 	  		</Route>
 	  	</Router>
 	  , document.getElementById('root')

@@ -25,6 +25,7 @@ const menuItems = [
   { route: '/', text: 'Home' },
   { route: '/profile', text: 'Profile' },
   { route: '/feed', text: 'Feed' },
+  { route: '/events', text: 'Events' },
 ];
 
 console.log("History: ", History);
