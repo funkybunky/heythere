@@ -77,12 +77,17 @@ export default class EventContainer extends Component {
 			let dialog;
 			if (err) {
 				console.log("error: ", err);
-				message = "something strange happened. didn't create event. message: " + err.message;
-				// show Dialog: something strange happened. didn't create event. message:
-				// option: OK
-				dialog = (<Dialog title="Oops!" ref="dialog" actions={[{ text: "OK" }]}>message</Dialog> )
+				message = "Something strange happened. We didn't create the event. message: " + err.message;
+				this.setState({
+					dialog: {
+						title: "Oops!",
+						actions: [{ text: "OK" }],
+						content: "Something strange happened. We didn't create the event.",
+					}
+				});
 			} else if (result && result.message === "OK") {
 				message = "";
+				// TODO: get the event id out of the result and save it in state to be able to retrieve it from the joinEventHandler in the dialog later on?
 				this.setState({
 					dialog: {
 						title: "Event successfully created",
@@ -90,12 +95,17 @@ export default class EventContainer extends Component {
 						content: "All went well",
 					}
 				});
-				// show Dialog: successfully created, close create event thing, join event now option and OK option
-				// dialog = (<Dialog title="Event successfully created" ref="dialog" actions={[{ text: "OK" }, { text: "Join event now", onTouchTap: this.joinNewEvent, ref: "joinNewEvent" }]}></Dialog>)
 			} else {
-				message = result.message;
-				dialog = (<Dialog title="Event already exists" ref="dialog" actions={[{ text: "OK" }]}>Please check if the event you tried to create is not already there.</Dialog>)
+				message = result.message || "";
+				this.setState({
+					dialog: {
+						title: "Event already exists",
+						actions: [{ text: "OK" }],
+						content: "Please use the search function to check if the event you tried to create is not already there.",
+					}
+				});
 			}
+			// TODO: refactor to call setState only once!
 			this.setState({
 				createEventErrorMsg: message,
 				showFeedback: true,
