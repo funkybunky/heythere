@@ -8,7 +8,8 @@ import "../../methods/createEvent";
 
 import EventList from "./EventList";
 import EventSearch from "./EventSearch";
-import CreateEvent from "./CreateEvent";
+// import CreateEvent from "./CreateEvent";
+import CreateEvent from "./CreateEventFormsy";
 
 import CircularProgress from "material-ui/lib/circular-progress";
 import RaisedButton from "material-ui/lib/raised-button";
@@ -22,6 +23,11 @@ export default class EventContainer extends Component {
 		showCreateEventForm: false,
 		showFeedback: false,
 		createEventErrorMsg: "",
+		dialog: {
+			title: "",
+			actions: [],
+			content: "",
+		},
 	}
 
 	getMeteorData() {
@@ -65,8 +71,8 @@ export default class EventContainer extends Component {
 
 	createEventHandler = (eventData) => {
 		console.log("eventData: ", eventData);
-		Meteor.call("createEvent", eventData, function(err, result) {
-			console.log("CB!");
+		Meteor.call("createEvent", eventData, (err, result) => {
+			console.log("create event CB!");
 			let message;
 			let dialog;
 			if (err) {
@@ -75,11 +81,17 @@ export default class EventContainer extends Component {
 				// show Dialog: something strange happened. didn't create event. message:
 				// option: OK
 				dialog = (<Dialog title="Oops!" ref="dialog" actions={[{ text: "OK" }]}>message</Dialog> )
-			}
-			if (result && result.message === "OK") {
+			} else if (result && result.message === "OK") {
 				message = "";
+				this.setState({
+					dialog: {
+						title: "Event successfully created",
+						actions: [{ text: "OK" }, { text: "Join event now", onTouchTap: this.joinNewEvent, ref: "joinNewEvent" }],
+						content: "All went well",
+					}
+				});
 				// show Dialog: successfully created, close create event thing, join event now option and OK option
-				dialog = (<Dialog title="Event successfully created" ref="dialog" actions={[{ text: "OK" }, { text: "Join event now", onTouchTap: this.handleJoinNewEvent, ref: "joinNewEvent" }]}></Dialog>)
+				// dialog = (<Dialog title="Event successfully created" ref="dialog" actions={[{ text: "OK" }, { text: "Join event now", onTouchTap: this.joinNewEvent, ref: "joinNewEvent" }]}></Dialog>)
 			} else {
 				message = result.message;
 				dialog = (<Dialog title="Event already exists" ref="dialog" actions={[{ text: "OK" }]}>Please check if the event you tried to create is not already there.</Dialog>)
@@ -88,8 +100,7 @@ export default class EventContainer extends Component {
 				createEventErrorMsg: message,
 				showFeedback: true,
 			})
-			// this.refs["dialog"].show();
-			dialog.show();
+			this.refs["dialog"].show();
 		})
 	}
 
@@ -104,6 +115,11 @@ export default class EventContainer extends Component {
 		if (this.data.isReady) {
 			return (
 				<div>
+					<Dialog
+						title={this.state.dialog.title}
+						ref="dialog"
+						actions={this.state.dialog.actions}
+					>{this.state.dialog.content}</Dialog>
 					<EventSearch
 						searchString={this.state.searchString}
 						inputHandler={this.searchInputHandler}
