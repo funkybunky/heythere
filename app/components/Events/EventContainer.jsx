@@ -5,6 +5,7 @@ import reactMixin from 'react-mixin';
 import { Events } from "../../collections/Events";
 
 import "../../methods/createEvent";
+import "../../methods/joinEvent";
 
 import EventList from "./EventList";
 import EventSearch from "./EventSearch";
@@ -63,6 +64,13 @@ export default class EventContainer extends Component {
 		this.setState({
 			searchString,
 		})
+	}
+
+	joinExistingEvent = (eventId) => {
+		console.log("before joinEvent called");
+		Meteor.call("joinEvent", eventId, () => {
+			console.log("joinEvent called");
+		});
 	}
 
 	joinNewEvent = () => {
@@ -141,7 +149,6 @@ export default class EventContainer extends Component {
 					/>
 					{this.state.showCreateEventForm ? 
 						<CreateEvent
-							name="bla"
 							inputHandler={this.createEventHandler}
 							errorMessage={this.state.createEventErrorMsg}
 						/> : ""
@@ -149,6 +156,7 @@ export default class EventContainer extends Component {
 					<h2>Today's events:</h2>
 					<EventList
 						events={this.data.todaysEvents}
+						handleJoinEvent={this.joinExistingEvent}
 					/>
 				</div>
 			)

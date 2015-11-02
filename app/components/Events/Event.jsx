@@ -3,6 +3,7 @@ import React, { Component } from "react";
 
 import TableRow from "material-ui/lib/table/table-row";
 import TableRowColumn from "material-ui/lib/table/table-row-column";
+import RaisedButton from "material-ui/lib/raised-button";
 
 export default class Event extends Component {
 	static propTypes = {
@@ -10,7 +11,15 @@ export default class Event extends Component {
 		startsAt: React.PropTypes.object.isRequired,
 		endsAt: React.PropTypes.object.isRequired,
 		location: React.PropTypes.string.isRequired,
+		id: React.PropTypes.string.isRequired,
+
+		handleJoinEvent: React.PropTypes.func.isRequired,
 	}
+
+	handleJoin = () => {
+		this.props.handleJoinEvent(this.props.id);
+	}
+
 	render() {
 		const startsAt = this.props.startsAt;
 		const endsAt = this.props.endsAt;
@@ -21,14 +30,20 @@ export default class Event extends Component {
 		return (
       <TableRow>
           <TableRowColumn>{this.props.name}</TableRowColumn>
-          <TableRowColumn>{startsAt.getHours()}:{startsAtMinutes}</TableRowColumn>
-          <TableRowColumn>{endsAt.getHours()}:{endsAtMinutes}</TableRowColumn>
+          <TableRowColumn style={styles.columnTime}>{startsAt.getHours()}:{startsAtMinutes}</TableRowColumn>
+          <TableRowColumn style={styles.columnTime}>{endsAt.getHours()}:{endsAtMinutes}</TableRowColumn>
           <TableRowColumn>{this.props.location}</TableRowColumn>
-
+          <TableRowColumn><RaisedButton label="Join" onClick={this.handleJoin} /></TableRowColumn>
       </TableRow>			
 		)
 	}
 }
+
+const styles = {
+	columnTime: {
+		width: "3em",
+	},
+};
 
 const style = {
 	status: {
