@@ -32,15 +32,18 @@ export default class EventContainer extends Component {
 	}
 
 	getMeteorData() {
-		let currentEventId;
+		let currentEventId = Meteor.user().currentEvent.eventId;
 		let joinedEventAt;
 
 		const eventHandle = Meteor.subscribe("todaysEvents");
 		const userHandle = Meteor.subscribe("userData", () => {
 			// If a function is passed instead of an object, it is interpreted as an onReady callback.
+			console.log("Meteor.user: ", Meteor.user());
 			currentEventId = Meteor.user().currentEvent.eventId;
 			joinedEventAt = Meteor.user().currentEvent.signedInAt;
 		});
+
+		// const currentEvent = currentEventId ? Events.find(currentEventId) : null;
 
 		const searchRegExp = new RegExp(this.state.searchString, "gi");
 		const queryObj = {
@@ -53,9 +56,9 @@ export default class EventContainer extends Component {
 		return {
 			isReady: eventHandle.ready() && userHandle.ready(),
 			todaysEvents: Events.find(queryObj/*{startsAt: }*/).fetch(),
-			// todaysEvents: fakeEvents,
 			currentEventId,
 			joinedEventAt,
+			currentEvent: Events.findOne(currentEventId),
 		}
 	}
 
@@ -133,6 +136,7 @@ export default class EventContainer extends Component {
 		if (this.data.isReady) {
 			return (
 				<div>
+					{this.data.currentEvent ? <p>You are logged in to this event: {this.data.currentEvent.name}</p> : ""}
 					<Dialog
 						title={this.state.dialog.title}
 						ref="dialog"

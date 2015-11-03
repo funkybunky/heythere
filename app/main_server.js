@@ -11,6 +11,7 @@ import "./methods/updateNote";
 import "./methods/starUser";
 import "./methods/changePublicData";
 import "./methods/createEvent";
+import "./methods/joinEvent";
 
 // these will only run on the sever since we only 'import' them in main_server.js
 

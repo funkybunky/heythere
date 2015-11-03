@@ -25,8 +25,6 @@ export default class CreateEvent extends Component {
 
 	state = {
 			name: "",
-			// startsAt: new Date(),
-			// endsAt: new Date(),
 			date: new Date(),
 			startTime: new Date(),
 			endTime: new Date(),
@@ -53,27 +51,9 @@ export default class CreateEvent extends Component {
     });
   }
 
-	onSubmitFormOld = () => {
-		const name = this.refs["name"].getValue();
-		const date = this.refs["date"].getDate();
-		const startTime = this.refs["startTime"].getTime();
-		const endTime = this.refs["endTime"].getTime();
-		const location = this.refs["location"].getValue();
-
-		const startsAt = new Date( date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDay(), startTime.getUTCHours(), startTime.getUTCMinutes() );
-		const endsAt = new Date( date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDay(), endTime.getUTCHours(), endTime.getUTCMinutes() );
-
-		this.props.inputHandler({
-			name,
-			startsAt,
-			endsAt,
-			location,
-		});
-	}
-
 	submitForm = (data) => {
-		console.log("Model: ", data);
-		// call inputHandler
+		// console.log("Model: ", data);
+
 		const { name, location, date, startTime, endTime } = data;
 		const startsAt = new Date( date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDay(), startTime.getUTCHours(), startTime.getUTCMinutes() );
 		const endsAt = new Date( date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDay(), endTime.getUTCHours(), endTime.getUTCMinutes() );		
