@@ -48,3 +48,35 @@ console.log('\n\nRunning on server only');
 console.log('There are # posts:', Posts.find().fetch().length);
 console.log("number of users: ", Users.find().count());
 
+Meteor.publish("currentEvent", function() {
+	const that = this;
+
+	const id = that.userId;
+	if (!id) throw new Meteor.Error("logged-out", "Please login to use this function.");
+
+	const currentUser = Users.findOne(id);
+
+	const eventId = currentUser.currentEvent.eventId;
+
+	const currentEvent = Events.findOne(eventId);
+
+	if (typeof currentEvent === "undefined") {
+		throw new Meteor.Error("unknown-error", "Something strange happened. We don't have a clue. Please reload and give as a shout about it. Sorry.");
+	}
+
+	console.log("currentEvent pub. participants: ", currentEvent.participants);
+
+	return [
+		Events.find(eventId), 
+		Users.find({ _id: { $in: currentEvent.participants } }),
+	];
+});
+
+Meteor.publish("currentEventParticipants", function() {
+	const that = this;
+
+	const id = that.userId;
+	if (!id) throw new Meteor.Error("logged-out", "Please login to use this function.");
+
+
+});

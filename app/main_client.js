@@ -4,7 +4,8 @@ import { Router, Route, IndexRoute } from 'react-router';
 // import createBrowserHistory from 'react-router/history/lib/createBrowserHistory';
 
 import App from './components/App2.jsx';
-import NearbyPeopleFeed from './components/NearbyPeopleFeed/NearbyPeopleFeed.jsx';
+// import NearbyPeopleFeed from './components/NearbyPeopleFeed/NearbyPeopleFeed.jsx';
+import FeedContainer from "./components/NearbyPeopleFeed/FeedContainer";
 import Contact from './components/Contact/Contact.jsx';
 import NewContact from './components/Contact/NewContact.jsx';
 import Login from "./components/Login/Login.jsx";
@@ -53,7 +54,7 @@ Meteor.startup(() => {
 	  		<Route path="/" component={App} >
 	  			
 	  			<Route path="login" component={Login} loginCb={handleLogin} />
-	  			<Route path="feed" component={NearbyPeopleFeed} onEnter={requireAuth} />
+	  			<Route path="feed" component={FeedContainer} onEnter={requireAuth} />
 	  			<Route path="contact/:id" component={Contact} onEnter={requireAuth} />
 	  			<Route path="contact/new/:id" component={NewContact} onEnter={requireAuth} />
 	  			<Route path="profile" component={ProfileWrapper} />

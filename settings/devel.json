@@ -1,7 +1,10 @@
 {
   "public": {
     "env": "DEVEL",
-    "foo": "bar"
+    "foo": "bar",
+    "events": {
+    	"joinMinutesBeforeEventStart": 60
+    }
   },
   "secret": "golf1234"
 }

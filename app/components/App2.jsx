@@ -92,7 +92,7 @@ class App extends Component {
             {this.props.children}
           </section>
         ) : (
-          <div>Please Login to see the feed</div>
+          <div>Loading..</div>
         )
         }
 
@@ -104,3 +104,6 @@ class App extends Component {
 App.contextTypes = { history: PropTypes.history };
 export default App;
 // https://github.com/rackt/react-router/blob/master/docs/API.md#but-im-using-classes
+
+
+// {/*<div>Please Login to see the feed</div>*/}

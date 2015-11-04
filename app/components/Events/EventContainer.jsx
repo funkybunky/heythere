@@ -5,7 +5,7 @@ import reactMixin from 'react-mixin';
 import { Events } from "../../collections/Events";
 
 import "../../methods/createEvent";
-import "../../methods/joinEvent";
+// import "../../methods/joinEvent";
 
 import EventList from "./EventList";
 import EventSearch from "./EventSearch";
@@ -43,8 +43,6 @@ export default class EventContainer extends Component {
 			joinedEventAt = Meteor.user().currentEvent.signedInAt;
 		});
 
-		// const currentEvent = currentEventId ? Events.find(currentEventId) : null;
-
 		const searchRegExp = new RegExp(this.state.searchString, "gi");
 		const queryObj = {
 			"$or": [
@@ -71,8 +69,10 @@ export default class EventContainer extends Component {
 
 	joinExistingEvent = (eventId) => {
 		console.log("before joinEvent called");
-		Meteor.call("joinEvent", eventId, () => {
+		Meteor.call("joinEvent", eventId, (error, result) => {
 			console.log("joinEvent called");
+			if (error) console.log("oh noes! ", error.message);
+			if (result) console.log("all went well. ", result);
 		});
 	}
 
