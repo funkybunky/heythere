@@ -29,14 +29,25 @@ const menuItems = [
   { route: '/events', text: 'Events' },
 ];
 
-console.log("History: ", History);
+// console.log("History: ", History);
 
 @reactMixin.decorate(ReactMeteorData)
 @reactMixin.decorate(History)
 class App extends Component {
   getMeteorData() {
-    let handle = Meteor.subscribe("userData");
-    // let friendHandle = Meteor.subscribe("friendsData");    
+    const handle = Meteor.subscribe("userData", () => {
+      const user = Meteor.user();
+      // route the user here
+      // if user is currently in an event that is still ongoing, redirect to feed
+      // if event has ended, redirect to event page
+      // if user is not logged into event, redirect to event page
+      if (user.currentEvent.eventId.length > 0) {
+        this.context.history.pushState(null, "/feed");
+      } else {
+        this.context.history.pushState(null, "/events");
+      }
+    });
+
     return {
       isReady: handle.ready(),
       currentUser: Meteor.user(),
@@ -88,7 +99,7 @@ class App extends Component {
 
         { this.data.isReady ? (
           <section>
-            <h1>Hello, you are logged in as {this.data.currentUser.username}!</h1>
+            {/*<h1>Hello, you are logged in as {this.data.currentUser.username}!</h1>*/}
             {/*<Link to="/feed"><button>Go to Feed</button></Link>*/}
             {this.props.children}
           </section>

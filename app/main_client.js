@@ -12,9 +12,8 @@ import Login from "./components/Login/Login.jsx";
 import ProfileWrapper from "./components/EditProfile/ProfileWrapper";
 import EventContainer from "./components/Events/EventContainer";
 
-import './method_example';
 import "./methods/sendInvite";
-
+import "./methods/leaveEvent";
 
 const injectTapEventPlugin = require("react-tap-event-plugin");
 
