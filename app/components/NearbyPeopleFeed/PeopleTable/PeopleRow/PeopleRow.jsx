@@ -1,17 +1,18 @@
 /* global ReactMeteorData */
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+import reactMixin from 'react-mixin';
 import Radium from "radium";
-import { Link } from 'react-router';
+import { Link, PropTypes } from 'react-router';
 
 import Checkbox from "material-ui/lib/checkbox";
 import ToggleStar from "material-ui/lib/svg-icons/toggle/star";
 import ToggleStarBorder from "material-ui/lib/svg-icons/toggle/star-border";
-
 import RaisedButton from "material-ui/lib/raised-button";
 
+@reactMixin.decorate(History)
 @Radium
-export default class PeopleRow extends Component {
+class PeopleRow extends Component {
   static propTypes = {
     profile: React.PropTypes.object.isRequired,
     handleStarring: React.PropTypes.func.isRequired,
@@ -43,6 +44,19 @@ export default class PeopleRow extends Component {
   handleConnect = (e) => {
   	Meteor.call("sendInvite", this.props.id);
   }
+
+  handleNewContact = (e) => {
+  	e.preventDefault();
+ 		Meteor.call("acceptInvite", this.props.id, (err, res) => {
+			if (err) console.log("error while calling acceptInvite: ", err);
+			if (res) {
+				console.log('call to acceptInvite successful!', res);
+				// route to contact
+				this.context.history.pushState(null, `/contact/${this.props.id}`);
+			}
+		}); 	
+  }
+
 	render() {
 		let connectAction;
 		if (this.props.isConnected) {
@@ -58,7 +72,8 @@ export default class PeopleRow extends Component {
 			// react-router docs: https://github.com/rackt/react-router/blob/master/docs/API.md#link (don't mention params)
 			connectAction = (
 				<div><p>You received an invitation</p>
-					<RaisedButton containerElement={<Link to={`/contact/new/${this.props.id}`} />} label="Connect!" />
+					{/*<RaisedButton containerElement={<Link to={`/contact/new/${this.props.id}`} />} label="Connect!" />*/}
+					<RaisedButton onClick={this.handleNewContact} label="Connect!" />
 				</div>
 			)
 		} else {
@@ -118,6 +133,9 @@ export default class PeopleRow extends Component {
 		)
 	}
 }
+
+PeopleRow.contextTypes = { history: PropTypes.history };
+export default PeopleRow;
 
 let styles = {
 	avatar: {

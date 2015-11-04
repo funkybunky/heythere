@@ -56,7 +56,6 @@ Meteor.startup(() => {
 	  			<Route path="login" component={Login} loginCb={handleLogin} />
 	  			<Route path="feed" component={FeedContainer} onEnter={requireAuth} />
 	  			<Route path="contact/:id" component={Contact} onEnter={requireAuth} />
-	  			<Route path="contact/new/:id" component={NewContact} onEnter={requireAuth} />
 	  			<Route path="profile" component={ProfileWrapper} />
 	  			<Route path="events" component={EventContainer} />
 	  		</Route>
@@ -66,6 +65,7 @@ Meteor.startup(() => {
 	// });
 });
 // <IndexRoute component={NearbyPeopleFeed} />
+// 	<Route path="contact/new/:id" component={NewContact} onEnter={requireAuth} />
 
 // GEOLOCATION
 // ------------------------------------------------

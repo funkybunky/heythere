@@ -24,7 +24,11 @@ export default class NewContact extends Component {
 	}
 	render() {
 		return (
-			<ContactInfo id={this.props.params.id} username={this.state.username} notes="" />
+			<ContactInfo 
+				id={this.props.params.id} 
+				username={this.state.username} 
+				notes=""
+			/>
 		)
 	}
 }	

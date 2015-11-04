@@ -30,7 +30,7 @@ export default class ContactInfo extends Component {
 		const friendData = this.props.friendData;
 		const friendJsx = Object.keys(friendData).map((contactProp) => {
 			return (
-				<div>
+				<div key={contactProp}>
 					<h4>{contactProp}</h4>
 					<p>{friendData[contactProp]}</p>
 				</div>
