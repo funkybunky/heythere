@@ -18,15 +18,12 @@ import _ from "lodash";
 @reactMixin.decorate(ReactMeteorData)
 class FeedContainer extends Component {
 
-	state = {
-		userMessage: "",
-	}
-
 	getMeteorData() {
 		if (!Meteor.userId()) throw new Meteor.Error("logged-out", "Please login to see this page");
 
 		let participants = [];
-		const currentEventId = Meteor.user().currentEvent.eventId;
+		let userMessage = "";
+		
 		// console.log("currentEventId: ", currentEventId);
 
 		const userHandle = Meteor.subscribe("userData");
@@ -34,12 +31,13 @@ class FeedContainer extends Component {
 			onStop: (error) => {
 				if (error) console.log("error: ", error);
 				console.log("onStop currentEvent");
-					this.setState({
-						userMessage: "You haven't joined an event. You will be redirected to the events section where you can select an event to join.",
-					});
-					Meteor.setTimeout(() => this.context.history.pushState(null, "/events"), 3000); // TODO:use settings var here
+				// don't call setState from inside getMeteorData(): https://github.com/meteor/react-packages/issues/71
+				userMessage = "You haven't joined an event. You will be redirected to the events section where you can select an event to join."; // TODO: move all of these callbacks into the handle.ready() if clause! that's reactive. in the publication, mark the pub as ready, don't throw an error, in order to trigger the ready() method
+				Meteor.setTimeout(() => this.context.history.pushState(null, "/events"), 1500); // TODO:use settings var here
 			},
 			onReady: () => {
+				console.log("onReady callback");
+				const currentEventId = Meteor.user().currentEvent.eventId;
 				const currentEvent = Events.findOne(currentEventId);
 				// check event: is it still ongoing or has it ended already? if so, call leaveEvent method
 				const eventEndTime = Events.findOne(currentEventId).endsAt;
@@ -48,18 +46,19 @@ class FeedContainer extends Component {
 					Meteor.call("leaveEvent", currentEventId, (err, res) => {
 						if (err) console.log("Error while calling leaveEvent: ", err);
 						if (res) {
-							this.setState({
-								userMessage: "Your event is already over. You will be redirected to the events section where you can select another event to join.",
-							});		
+							userMessage = "Your event is already over. You will be redirected to the events section where you can select another event to join.";
 							console.log("Event is already over. Redirecting to events..");
-							this.context.history.pushState(null, "/events");
+							Meteor.setTimeout( () => this.context.history.pushState(null, "/events"), 1500);
 						}
 					})
 				}
 			}
 		});
 
+		console.log("eventHandle: ", eventHandle);
 		if (eventHandle.ready()) { // use this pattern instead of a subscription callback, it's reactive
+			console.log("eventHandle is ready");
+			const currentEventId = Meteor.user().currentEvent.eventId;
 			const currentEvent = Events.findOne(currentEventId);
 			if (currentEvent) {
 				participants = currentEvent.participants;
@@ -69,20 +68,22 @@ class FeedContainer extends Component {
 
 		return {
 			isReady: userHandle.ready() && eventHandle.ready(),
-			currentEvent: Events.findOne(currentEventId),
+			currentEvent: Meteor.user().currentEvent && Meteor.user().currentEvent.eventId && Events.findOne(Meteor.user().currentEvent.eventId),
 			userData: Meteor.user(),
 			participants: Users.find({ _id: { $in: participants }}).fetch(),
+			userMessage: userMessage,
 		}
 	}
 
 	render() {
-		// console.log("this.data: ", this.data);
-		if (this.state.userMessage !== "") {
+		console.log("this.data: ", this.data);
+		if (this.data && this.data.userMessage !== "") {
 			return (
-					<div>{this.state.userMessage} //TODO: render dialog here</div>
+					<div>{this.data.userMessage} //TODO: render dialog here</div>
 			)
 		}
 		if (this.data && this.data.isReady) {
+			// TODO: easy: if (this.data.currentEvent is undefined, just render a dialog and route)
 			return (
 				<div>
 					<PeopleFeed
