@@ -7,6 +7,7 @@ Meteor.methods({
 			profession: String,
 			avatar: String,
 			passion: String,
+			searchesFor: String,
 		});
 		check(privateData, {
 			lastName: String,

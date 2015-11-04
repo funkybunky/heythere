@@ -18,6 +18,7 @@ export default class EditProfile extends Component {
 		profession: React.PropTypes.string.isRequired,
 		passion: React.PropTypes.string.isRequired,
 		avatar: React.PropTypes.string.isRequired,
+		searchesFor: React.PropTypes.string.isRequired,
 
 		inputHandler: React.PropTypes.func.isRequired,
 		// avatarHandler: React.PropTypes.func.isRequired,
@@ -38,6 +39,7 @@ export default class EditProfile extends Component {
 			firstName: ReactDOM.findDOMNode(this.refs["firstName"]).value,
 			profession: ReactDOM.findDOMNode(this.refs["profession"]).value,
 			passion: ReactDOM.findDOMNode(this.refs["passion"]).value,
+			searchesFor: ReactDOM.findDOMNode(this.refs["searchesFor"]).value,
 			avatar: this.state.imgSrc,
 		},
 		{
@@ -89,6 +91,15 @@ export default class EditProfile extends Component {
 					/>
 				</label>
 				<br />
+				<label>What kind of people do you search for? 
+					<input
+						type="text"
+						value={this.props.searchesFor} 
+						onChange={this.handleChange} 
+						ref="searchesFor"
+					/>
+				</label>
+				<br />	
 				{/*<input type="submit" value="Post" />*/}
 				<label>Avatar:
 				{/*

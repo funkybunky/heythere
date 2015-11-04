@@ -27,6 +27,7 @@ export default class ProfileWrapper extends Component {
 				firstName={publicData.firstName}
 				profession={publicData.profession}
 				passion={publicData.passion}
+				searchesFor={publicData.searchesFor}
 				avatar={publicData.avatar}
 
 				privateData={this.data.privateData}

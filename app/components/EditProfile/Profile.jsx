@@ -34,6 +34,7 @@ export default class Profile extends Component {
 			firstName: this.props.firstName,
 			profession: this.props.profession,
 			passion: this.props.passion,
+			searchesFor: this.props.searchesFor,
 			avatar: this.props.avatar,
 		},
 		isSaved: true,		
@@ -64,6 +65,7 @@ export default class Profile extends Component {
 				firstName={publicData.firstName}
 				profession={publicData.profession}
 				passion={publicData.passion}
+				searchesFor={publicData.searchesFor}
 				avatar={publicData.avatar}
 
 				privateData={this.state.privateData}

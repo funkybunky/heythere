@@ -92,7 +92,8 @@ class PeopleRow extends Component {
 		<section style={[styles.item4x]}>
 			<h3>{this.props.profile.profession}</h3>
 			<p>{this.props.profile.firstName}</p>
-			<p>{this.props.profile.passion}</p>
+			<p>Passion: {this.props.profile.passion}</p>
+			<p>Searches for: {this.props.profile.searchesFor}</p>
 		</section>
 
 		<section style={[styles.item]}>
