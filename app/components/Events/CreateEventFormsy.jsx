@@ -85,6 +85,8 @@ export default class CreateEvent extends Component {
             hintText="Cat Lover Meetup"
             floatingLabelText="Event Title" />
 
+          <br />
+
            <FormsyText
             name='location'
             validations='isExisty'
@@ -118,7 +120,7 @@ export default class CreateEvent extends Component {
 		  	label="Submit"
 		  	primary={true}
 		  	disabled={!this.state.canSubmit}
-		  /> {/* show loading indicator here after submit */}
+		  /> {/* TODO: show loading indicator here after submit */}
 		 </Formsy.Form>
 
 		</section>

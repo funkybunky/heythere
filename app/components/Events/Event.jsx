@@ -64,5 +64,3 @@ const style = {
 		},
 	},
 };
-
-//           <TableRowColumn>join event</TableRowColumn>

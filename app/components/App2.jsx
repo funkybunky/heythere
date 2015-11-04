@@ -3,21 +3,22 @@ import React, {Component} from 'react';
 import { Link, PropTypes } from 'react-router';
 import reactMixin from 'react-mixin';
 
-import BlazeTemplate from './BlazeTemplate';
-import BlazeTemplProps from "./BlazeTemplProps.jsx";
 import {Users, Posts} from '../collections/index.js';
-import NearbyPeopleFeed from "./NearbyPeopleFeed/NearbyPeopleFeed";
 
+// import BlazeTemplate from './BlazeTemplate';
+import BlazeTemplProps from "./BlazeTemplProps.jsx";
+import NearbyPeopleFeed from "./NearbyPeopleFeed/NearbyPeopleFeed";
 import ProfileWrapper from "./EditProfile/ProfileWrapper";
 
 import "normalize.css";
 import "./App.css";
+
 import AppBar from 'material-ui/lib/app-bar';
 import IconMenu from "material-ui/lib/menus/icon-menu";
 import IconButton from "material-ui/lib/icon-button";
 import MenuItem from "material-ui/lib/menus/menu-item";
 import FlatButton from "material-ui/lib/flat-button";
-
+import CircularProgress from "material-ui/lib/circular-progress";
 import LeftNav from "material-ui/lib/left-nav";
 
 const menuItems = [
@@ -92,7 +93,7 @@ class App extends Component {
             {this.props.children}
           </section>
         ) : (
-          <div>Loading..</div>
+          <CircularProgress mode="indeterminate" size={2} />
         )
         }
 
@@ -107,3 +108,4 @@ export default App;
 
 
 // {/*<div>Please Login to see the feed</div>*/}
+// <div>Loading..</div>
