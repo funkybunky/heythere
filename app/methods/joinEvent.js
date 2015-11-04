@@ -1,6 +1,8 @@
 import { Events, EventSchema } from "../collections/Events";
 import { Users } from "../collections/index";
 
+import _ from "lodash";
+
 import { throwLoggedOutError, isEventJoinable } from "../helpers";
 
 Meteor.methods({
