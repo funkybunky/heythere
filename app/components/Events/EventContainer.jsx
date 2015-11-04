@@ -1,5 +1,6 @@
 /* global Meteor, ReactMeteorData */
 import React, { Component } from "react";
+import { PropTypes } from 'react-router';
 import reactMixin from 'react-mixin';
 
 import { Events } from "../../collections/Events";
@@ -17,7 +18,8 @@ import RaisedButton from "material-ui/lib/raised-button";
 import Dialog from "material-ui/lib/dialog";
 
 @reactMixin.decorate(ReactMeteorData)
-export default class EventContainer extends Component {
+@reactMixin.decorate(History)
+class EventContainer extends Component {
 
 	state = {
 		searchString: "",
@@ -72,7 +74,10 @@ export default class EventContainer extends Component {
 		Meteor.call("joinEvent", eventId, (error, result) => {
 			console.log("joinEvent called");
 			if (error) console.log("oh noes! ", error.message);
-			if (result) console.log("all went well. ", result);
+			if (result) {
+				console.log("all went well. ", result);
+				this.context.history.pushState(null, "/feed");
+			}
 		});
 	}
 
@@ -171,3 +176,6 @@ export default class EventContainer extends Component {
 		}
 	}
 }
+
+EventContainer.contextTypes = { history: PropTypes.history };
+export default EventContainer;
