@@ -31,6 +31,7 @@ class EventContainer extends Component {
 			actions: [],
 			content: "",
 		},
+		newEventId: "",
 	}
 
 	getMeteorData() {
@@ -83,6 +84,17 @@ class EventContainer extends Component {
 
 	joinNewEvent = () => {
 		console.log("join new event");
+		// console.log("this.refs: ", this.refs);
+		// const eventId = this.refs["joinNewEvent"].newEventId; // doesn't work, at this moment, refs is not updated yet; use state instead
+		const eventId = this.state.newEventId;
+		Meteor.call("joinEvent", eventId, (error, result) => {
+			console.log("joinEvent called");
+			if (error) console.log("oh noes! ", error.message);
+			if (result) {
+				console.log("all went well. ", result);
+				this.context.history.pushState(null, "/feed");
+			}
+		});
 	}
 
 	createEventHandler = (eventData) => {
@@ -109,7 +121,8 @@ class EventContainer extends Component {
 						title: "Event successfully created",
 						actions: [{ text: "OK" }, { text: "Join event now", onTouchTap: this.joinNewEvent, ref: "joinNewEvent" }],
 						content: "All went well",
-					}
+					},
+					newEventId: result.event._id,
 				});
 			} else {
 				message = result.message || "";
