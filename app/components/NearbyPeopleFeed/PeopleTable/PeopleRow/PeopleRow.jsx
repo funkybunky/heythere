@@ -75,9 +75,9 @@ export default class PeopleRow extends Component {
 		</section>
 
 		<section style={[styles.item4x]}>
-			<h3>{this.props.profile.role}</h3>
-	
-			<p>{this.props.profile.name}</p>
+			<h3>{this.props.profile.profession}</h3>
+			<p>{this.props.profile.firstName}</p>
+			<p>{this.props.profile.passion}</p>
 		</section>
 
 		<section style={[styles.item]}>

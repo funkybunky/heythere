@@ -17,7 +17,7 @@ export default class PeopleTable extends Component {
 			 :
 			 rows.concat(
 			 	<PeopleRow 
-			 		profile={user.profile} 
+			 		profile={user.publicData} 
 			 		key={user._id}
 			 		id={user._id}
 			 		handleStarring={this.props.handleStarring}
