@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { PropTypes } from 'react-router';
 import reactMixin from 'react-mixin';
+import Radium from "radium";
 
 import { Events } from "../../collections/Events";
 
@@ -19,7 +20,11 @@ import Dialog from "material-ui/lib/dialog";
 
 @reactMixin.decorate(ReactMeteorData)
 @reactMixin.decorate(History)
+@Radium
 class EventContainer extends Component {
+  // contextTypes = {
+  //   leftMargin: React.PropTypes.object,
+  // }	
 
 	state = {
 		searchString: "",
@@ -175,7 +180,7 @@ class EventContainer extends Component {
 							errorMessage={this.state.createEventErrorMsg}
 						/> : ""
 					}
-					<h2>Today's events:</h2>
+					<h2 style={this.context.spacingLeft}>Today's events:</h2>
 					<EventList
 						events={this.data.todaysEvents}
 						handleJoinEvent={this.joinExistingEvent}

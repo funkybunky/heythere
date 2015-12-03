@@ -34,6 +34,19 @@ const menuItems = [
 @reactMixin.decorate(ReactMeteorData)
 @reactMixin.decorate(History)
 class App extends Component {
+  
+  static childContextTypes = {
+    spacingLeft: React.PropTypes.object,
+  }
+
+  getChildContext = () => {
+    return { 
+      spacingLeft: {
+        marginLeft: "5%",
+      }
+    };
+  }
+
   getMeteorData() {
     const handle = Meteor.subscribe("userData", () => {
       const user = Meteor.user();

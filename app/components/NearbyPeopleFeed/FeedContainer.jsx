@@ -68,7 +68,7 @@ class FeedContainer extends Component {
 
 		return {
 			isReady: userHandle.ready() && eventHandle.ready(),
-			currentEvent: Meteor.user().currentEvent && Meteor.user().currentEvent.eventId && Events.findOne(Meteor.user().currentEvent.eventId),
+			currentEvent: Events.findOne(Meteor.user().currentEvent.eventId),
 			userData: Meteor.user(),
 			participants: Users.find({ _id: { $in: participants }}).fetch(),
 			userMessage: userMessage,
