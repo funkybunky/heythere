@@ -67,6 +67,8 @@ class FeedContainer extends Component {
 			console.log("eventHandle is ready");
 			const currentEventId = Meteor.user().currentEvent.eventId;
 			const currentEvent = Events.findOne(currentEventId);
+			console.log("currentEventId: ", currentEventId);
+			console.log("currentEvent: ", currentEvent);
 			if (currentEvent) {
 				participants = currentEvent.participants;
 				_.pull(participants, Meteor.userId()); // remove the current user from participants so that he doesn't see himself in the feed ;)				
