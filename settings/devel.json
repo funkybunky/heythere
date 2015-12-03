@@ -3,7 +3,7 @@
     "env": "DEVEL",
     "foo": "bar",
     "events": {
-    	"joinMinutesBeforeEventStart": 60
+    	"joinMinutesBeforeEventStart": 6000
     }
   },
   "secret": "golf1234"

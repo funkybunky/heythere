@@ -29,11 +29,18 @@ class FeedContainer extends Component {
 		const userHandle = Meteor.subscribe("userData");
 		const eventHandle = Meteor.subscribe("currentEvent", {
 			onStop: (error) => {
-				if (error) console.log("error: ", error);
 				console.log("onStop currentEvent");
+				if (error) {
+					console.log("error: ", error);
+					userMessage = "You haven't joined an event. You will be redirected to the events section where you can select an event to join."; 
+					console.log(userMessage);
+					Meteor.setTimeout(() => this.context.history.pushState(null, "/events"), 1500); // TODO:use settings var here
+				}
+				// this callback gets triggered when you navigate to another page (like contact), because the subscription gets stopped, but that is the natural thing that happens
+				// soo, we could only redirect if there is an actuall error!
 				// don't call setState from inside getMeteorData(): https://github.com/meteor/react-packages/issues/71
-				userMessage = "You haven't joined an event. You will be redirected to the events section where you can select an event to join."; // TODO: move all of these callbacks into the handle.ready() if clause! that's reactive. in the publication, mark the pub as ready, don't throw an error, in order to trigger the ready() method
-				Meteor.setTimeout(() => this.context.history.pushState(null, "/events"), 1500); // TODO:use settings var here
+				// TODO: move all of these callbacks into the handle.ready() if clause! that's reactive. in the publication, mark the pub as ready, don't throw an error, in order to trigger the ready() method
+				
 			},
 			onReady: () => {
 				console.log("onReady callback");
@@ -82,7 +89,7 @@ class FeedContainer extends Component {
 					<div>{this.data.userMessage} //TODO: render dialog here</div>
 			)
 		}
-		if (this.data && this.data.isReady) {
+		if (this.data && this.data.isReady && this.data.currentEvent) {
 			// TODO: easy: if (this.data.currentEvent is undefined, just render a dialog and route)
 			return (
 				<div>
