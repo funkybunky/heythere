@@ -7,13 +7,13 @@ import {Users} from "../../collections/index";
 import {List} from "immutable";
 
 import BlazeTemplate from '../BlazeTemplate';
-import sendPosition from "./sendPosition";
+// import sendPosition from "./sendPosition";
 
 import "../../methods/starUser";
 
-Meteor.setInterval( function() {
-	sendPosition();
-}, 10000);
+// Meteor.setInterval( function() {
+// 	sendPosition();
+// }, 10000);
 
 @reactMixin.decorate(ReactMeteorData)
 export default class NearbyPeopleFeed extends Component {
