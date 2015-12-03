@@ -52,7 +52,12 @@ class EventContainer extends Component {
 		});
 
 		const searchRegExp = new RegExp(this.state.searchString, "gi");
+		let thisMorning = new Date();
+		thisMorning.setUTCHours(0,0,0,0);
+		let tonight = new Date();
+		tonight.setUTCHours(23,59,59,999);
 		const queryObj = {
+			"startsAt": { $gte: thisMorning, $lte: tonight },
 			"$or": [
 				{ "name": { $regex: searchRegExp } },
 				{ "location": { $regex: searchRegExp } },
@@ -61,7 +66,7 @@ class EventContainer extends Component {
 
 		return {
 			isReady: eventHandle.ready() && userHandle.ready(),
-			todaysEvents: Events.find(queryObj/*{startsAt: }*/).fetch(),
+			todaysEvents: Events.find(queryObj).fetch(),
 			currentEventId,
 			joinedEventAt,
 			currentEvent: Events.findOne(currentEventId),
