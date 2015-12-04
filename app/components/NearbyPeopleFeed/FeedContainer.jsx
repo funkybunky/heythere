@@ -26,6 +26,7 @@ class FeedContainer extends Component {
 		
 		// console.log("currentEventId: ", currentEventId);
 
+		let handleParticipants;
 		const userHandle = Meteor.subscribe("userData");
 		const eventHandle = Meteor.subscribe("currentEvent", {
 			onStop: (error) => {
@@ -46,6 +47,7 @@ class FeedContainer extends Component {
 				console.log("onReady callback");
 				const currentEventId = Meteor.user().currentEvent.eventId;
 				const currentEvent = Events.findOne(currentEventId);
+				console.log("currentEvent in callback: ", currentEvent);
 				// check event: is it still ongoing or has it ended already? if so, call leaveEvent method
 				const eventEndTime = Events.findOne(currentEventId).endsAt;
 				if (eventEndTime - Date.now() < 0) {
@@ -71,12 +73,13 @@ class FeedContainer extends Component {
 			console.log("currentEvent: ", currentEvent);
 			if (currentEvent) {
 				participants = currentEvent.participants;
-				_.pull(participants, Meteor.userId()); // remove the current user from participants so that he doesn't see himself in the feed ;)				
+				_.pull(participants, Meteor.userId()); // remove the current user from participants so that he doesn't see himself in the feed ;)
+				handleParticipants = Meteor.subscribe("currentEventParticipants", participants);
 			}
 		}
 
 		return {
-			isReady: userHandle.ready() && eventHandle.ready(),
+			isReady: userHandle.ready() && eventHandle.ready() && handleParticipants && handleParticipants.ready(),
 			currentEvent: Events.findOne(Meteor.user().currentEvent.eventId),
 			userData: Meteor.user(),
 			participants: Users.find({ _id: { $in: participants }}).fetch(),
