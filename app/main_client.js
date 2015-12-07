@@ -29,6 +29,7 @@ console.log('Running on client only');
 
 function requireAuth(nextState, replaceState) {
   if (!Meteor.userId())
+    console.log("requireAuth. no user logged in, redirecting..");
     replaceState({ nextPathname: nextState.location.pathname }, '/')
 }
 

@@ -49,16 +49,22 @@ class App extends Component {
   }
 
   getMeteorData() {
-    const handle = Meteor.subscribe("userData", () => {
-      const user = Meteor.user();
-      // route the user here
-      // if user is currently in an event that is still ongoing, redirect to feed
-      // if event has ended, redirect to event page
-      // if user is not logged into event, redirect to event page
-      if (user.currentEvent.eventId.length > 0) {
-        this.context.history.pushState(null, "/feed");
-      } else {
-        this.context.history.pushState(null, "/events");
+    const handle = Meteor.subscribe("userData", {
+      onReady: () => {
+        const user = Meteor.user();
+        console.log("currentUser: ", user);
+        // route the user here
+        // if user is currently in an event that is still ongoing, redirect to feed
+        // if event has ended, redirect to event page
+        // if user is not logged into event, redirect to event page
+        if (user.currentEvent.eventId.length > 0) {
+          this.context.history.pushState(null, "/feed");
+        } else {
+          this.context.history.pushState(null, "/events");
+        }
+      },
+      onStop: () => {
+        console.log("userData stopped");
       }
     });
 
@@ -116,15 +122,12 @@ class App extends Component {
       */}
        
 
-        { this.data.isReady ? (
           <section>
             {/*<h1>Hello, you are logged in as {this.data.currentUser.username}!</h1>*/}
             {/*<Link to="/feed"><button>Go to Feed</button></Link>*/}
             {this.props.children}
           </section>
-        ) : (
-          <CircularProgress mode="indeterminate" size={2} />
-        )
+
         }
 
       </div>
