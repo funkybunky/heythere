@@ -27,6 +27,7 @@ const menuItems = [
   { route: '/profile', text: 'Profile' },
   { route: '/feed', text: 'Feed' },
   { route: '/events', text: 'Events' },
+  { route: '/login', text: 'Logout' },
 ];
 
 // console.log("History: ", History);
@@ -83,9 +84,14 @@ class App extends Component {
     return (
       <div className="App">
         
+        {/*
         <AppBar title="HeyThere!"
           iconElementRight={<BlazeTemplProps template={Template.loginButtons} btp-align="right" />} iconStyleRight={{color: "white"}} onLeftIconButtonTouchTap={this.handleMenuClick}
         />
+        */}
+        <AppBar title="HeyThere!"
+          iconElementRight={<span>Name and Avatar</span>} iconStyleRight={{color: "white"}} onLeftIconButtonTouchTap={this.handleMenuClick}
+        />        
 
         <LeftNav 
           ref="leftNav" 
