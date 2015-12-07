@@ -24,9 +24,6 @@ const injectTapEventPlugin = require("react-tap-event-plugin");
 injectTapEventPlugin();
 
 
-Accounts.ui.config({
-  passwordSignupFields: 'USERNAME_AND_EMAIL',
-});
 
 console.log('Running on client only');
 
