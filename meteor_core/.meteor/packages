@@ -23,8 +23,6 @@ mindfront:why-reminify
 clinical:accounts-famous-dead-people
 #useraccounts:core
 #useraccounts:materialize
-accounts-password
-accounts-ui
 
 aldeed:simple-schema
 aldeed:collection2
