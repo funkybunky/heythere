@@ -1,3 +1,5 @@
+import "./config/useraccounts.config";
+
 import {Posts, Users} from '../app/collections';
 import { Events } from "collections/Events";
 
