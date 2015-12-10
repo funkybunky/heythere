@@ -56,7 +56,7 @@ export default class Profile extends Component {
 		let publicData = this.state.publicData;
 		return (
 
-			<div>
+			<div style={style.column}>
 				{this.state.isSaved ? <p style={style.status.saved}>Changes saved.</p> : <p style={style.status.saving}>Saving changes..</p>}
 
 				<EditProfile 
@@ -77,6 +77,14 @@ export default class Profile extends Component {
 }
 
 const style = {
+	column: {
+		display: "flex",
+		flexDirection: "column",
+		flexWrap: "wrap",
+		alignItems: "center",
+		justifyContent: "space-between",
+		// justifyContent: "center",
+	},	
 	status: {
 		saved: {
 			color: "green",
