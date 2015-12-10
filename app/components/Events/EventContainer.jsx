@@ -22,9 +22,9 @@ import Dialog from "material-ui/lib/dialog";
 @reactMixin.decorate(History)
 @Radium
 class EventContainer extends Component {
-  // contextTypes = {
-  //   leftMargin: React.PropTypes.object,
-  // }	
+	static contextTypes = {
+    leftMargin: React.PropTypes.object,
+  }
 
 	state = {
 		searchString: "",
@@ -161,6 +161,7 @@ class EventContainer extends Component {
 	}
 
 	render() {
+		console.log("current context. ", this.context);
 		if (this.data.isReady) {
 			return (
 			<div>
