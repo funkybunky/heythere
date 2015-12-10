@@ -202,3 +202,15 @@ class EventContainer extends Component {
 
 EventContainer.contextTypes = { history: PropTypes.history };
 export default EventContainer;
+
+
+const styles = {
+	column: {
+		display: "flex",
+		flexDirection: "column",
+		flexWrap: "wrap",
+		alignItems: "center",
+		justifyContent: "space-between",
+		// justifyContent: "center",
+	},		
+};
