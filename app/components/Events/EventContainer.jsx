@@ -163,13 +163,14 @@ class EventContainer extends Component {
 	render() {
 		if (this.data.isReady) {
 			return (
-				<div>
+			<div>
+				<Dialog
+					title={this.state.dialog.title}
+					ref="dialog"
+					actions={this.state.dialog.actions}
+				>{this.state.dialog.content}</Dialog>			
+				<div style={styles.column}>
 					{this.data.currentEvent ? <p>You are logged in to this event: {this.data.currentEvent.name}</p> : ""}
-					<Dialog
-						title={this.state.dialog.title}
-						ref="dialog"
-						actions={this.state.dialog.actions}
-					>{this.state.dialog.content}</Dialog>
 					<EventSearch
 						searchString={this.state.searchString}
 						inputHandler={this.searchInputHandler}
@@ -185,12 +186,13 @@ class EventContainer extends Component {
 							errorMessage={this.state.createEventErrorMsg}
 						/> : ""
 					}
-					<h2 style={this.context.spacingLeft}>Today's events:</h2>
-					<EventList
-						events={this.data.todaysEvents}
-						handleJoinEvent={this.joinExistingEvent}
-					/>
 				</div>
+				<h2 style={this.context.spacingLeft}>Today's events:</h2>
+				<EventList
+					events={this.data.todaysEvents}
+					handleJoinEvent={this.joinExistingEvent}
+				/>
+			</div>
 			)
 		} else {
 			return (
