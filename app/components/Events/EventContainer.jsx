@@ -175,7 +175,7 @@ class EventContainer extends Component {
 					ref="dialog"
 					actions={this.state.dialog.actions}
 				>{this.state.dialog.content}</Dialog>			
-				<div style={styles.column}>
+				<div style={this.context.spacingLeft}>
 					{this.data.currentEvent ? <p>You are logged in to this event: {this.data.currentEvent.name}</p> : ""}
 					<EventSearch
 						searchString={this.state.searchString}
@@ -186,6 +186,8 @@ class EventContainer extends Component {
 						label={this.state.showCreateEventForm ? "Cancel" : "Create Event" }
 						onClick={this.handleCreateEventButton} 
 					/>
+				</div>
+				<div style={styles.column}>
 					{this.state.showCreateEventForm ? 
 						<CreateEvent
 							inputHandler={this.createEventHandler}
