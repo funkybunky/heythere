@@ -66,7 +66,7 @@ class EventContainer extends Component {
 
 		return {
 			isReady: eventHandle.ready() && userHandle.ready(),
-			todaysEvents: Events.find(queryObj).fetch(),
+			todaysEvents: Events.find(queryObj, { sort: { startsAt: 1 }}).fetch(),
 			currentEventId,
 			joinedEventAt,
 			currentEvent: Events.findOne(currentEventId),

@@ -3,6 +3,7 @@ import {Posts, Users} from './collections';
 import { Events } from "collections/Events";
 
 import "./publications/events";
+import "./publications/currentEventParticipants";
 
 // Prolly used for SSR:
 // import React from 'react';
@@ -78,19 +79,11 @@ Meteor.publish("currentEvent", function() {
 
 	console.log("currentEvent pub. participants: ", currentEvent.participants);
 
-	return [
-		Events.find(eventId), 
-		Users.find({ _id: { $in: currentEvent.participants } }),
-	];
-});
-
-Meteor.publish("currentEventParticipants", function() {
-	const that = this;
-
-	const id = that.userId;
-	if (!id) throw new Meteor.Error("logged-out", "Please login to use this function.");
-
-
+	return Events.find(eventId);
+	// return [
+	// 	Events.find(eventId), 
+	// 	Users.find({ _id: { $in: currentEvent.participants } }),
+	// ];
 });
 
 // Uncomment for SSR:
