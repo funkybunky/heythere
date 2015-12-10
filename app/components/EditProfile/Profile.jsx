@@ -59,17 +59,17 @@ export default class Profile extends Component {
 			<div>
 				{this.state.isSaved ? <p style={style.status.saved}>Changes saved.</p> : <p style={style.status.saving}>Saving changes..</p>}
 
-			<EditProfile 
-				inputHandler={this.inputHandler}
+				<EditProfile 
+					inputHandler={this.inputHandler}
 
-				firstName={publicData.firstName}
-				profession={publicData.profession}
-				passion={publicData.passion}
-				searchesFor={publicData.searchesFor}
-				avatar={publicData.avatar}
+					firstName={publicData.firstName}
+					profession={publicData.profession}
+					passion={publicData.passion}
+					searchesFor={publicData.searchesFor}
+					avatar={publicData.avatar}
 
-				privateData={this.state.privateData}
-			/>
+					privateData={this.state.privateData}
+				/>
 
 			</div>
 		)
