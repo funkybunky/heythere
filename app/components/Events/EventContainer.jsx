@@ -38,9 +38,10 @@ class EventContainer extends Component {
 			context: context,
 		}
 	}
-	static contextTypes = {
-    spacingLeft: React.PropTypes.object,
-  }
+	// this doesn't work, you must define it on top of this class (see below)
+	// static contextTypes = {
+ //    spacingLeft: React.PropTypes.object,
+ //  }
 
 
 
@@ -166,8 +167,6 @@ class EventContainer extends Component {
 	}
 
 	render() {
-		console.log("current context. ", this.context);
-		console.log("current state.context. ", this.state.context);
 		if (this.data.isReady) {
 			return (
 			<div>
@@ -209,7 +208,11 @@ class EventContainer extends Component {
 	}
 }
 
-EventContainer.contextTypes = { history: PropTypes.history };
+EventContainer.contextTypes = { 
+	history: PropTypes.history,
+	tag: React.PropTypes.string,
+	spacingLeft: React.PropTypes.object,
+};
 export default EventContainer;
 
 

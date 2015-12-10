@@ -34,16 +34,16 @@ const menuItems = [
 @reactMixin.decorate(ReactMeteorData)
 @reactMixin.decorate(History)
 class App extends Component {
-  
-  static childContextTypes = {
-    spacingLeft: React.PropTypes.object,
-  }
 
+  // see for reference on context: https://github.com/facebook/react/blob/b4962e
+  // ff43dbf9dc6f85064ea6bbfb444b5557df/src/modern/class/__tests__
+  // /ReactES6Class-test.js#L103-L104
   getChildContext() {
     return { 
-      spacingLeft: {
-        marginLeft: "5%",
-      }
+      spacingLeft: { 
+        marginLeft: "5%" 
+      },
+      tag: "bla",
     };
   }
 
@@ -127,6 +127,10 @@ class App extends Component {
 }
 
 App.contextTypes = { history: PropTypes.history };
+App.childContextTypes = {
+  spacingLeft: React.PropTypes.object,
+  tag: React.PropTypes.string,
+};
 export default App;
 // https://github.com/rackt/react-router/blob/master/docs/API.md#but-im-using-classes
 
