@@ -1,4 +1,4 @@
-import "./config/useraccounts.config";
+//import "./config/useraccounts.config";
 
 // old:
 // import {Posts, Users} from '../app/collections';

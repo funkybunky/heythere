@@ -1,4 +1,4 @@
-import "./config/useraccounts.config";
+// import "./config/useraccounts.config";
 
 import React from 'react';
 import ReactDOM from 'react-dom';
