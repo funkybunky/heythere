@@ -16,6 +16,13 @@ import MenuItem from "material-ui/lib/menus/menu-item";
 import FlatButton from "material-ui/lib/flat-button";
 
 
+if (Meteor.isServer) {
+  // Template does not support server side
+  var Template = {
+    loginButtons: 'any'
+  };
+}
+
 @reactMixin.decorate(ReactMeteorData)
 export default class App extends Component {
   getMeteorData() {

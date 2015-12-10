@@ -1,7 +1,15 @@
-import {Posts, Users} from '../app/collections';
+
+import {Posts, Users} from './collections';
 import { Events } from "collections/Events";
 
 import "./publications/events";
+
+// Prolly used for SSR:
+// import React from 'react';
+// import App from './components/App.jsx';
+
+// we don't need fixtures atm:
+// import {createPosts, createUsers} from './fixtures';
 
 // we don't call this so we're just importing to initialize file
 import "./methods/updatePosition";
@@ -47,6 +55,7 @@ Meteor.publish("getPrivateUserData", function(otherId) {
 
 console.log('\n\nRunning on server only');
 console.log('There are # posts:', Posts.find().fetch().length);
+
 console.log("number of users: ", Users.find().count());
 
 Meteor.publish("currentEvent", function() {
@@ -83,3 +92,6 @@ Meteor.publish("currentEventParticipants", function() {
 
 
 });
+
+// Uncomment for SSR:
+// console.log('React SSR:', React.renderToString(<App/>));
