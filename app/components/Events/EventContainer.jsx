@@ -22,22 +22,27 @@ import Dialog from "material-ui/lib/dialog";
 @reactMixin.decorate(History)
 @Radium
 class EventContainer extends Component {
+	constructor(props, context) {
+		super(props, context);
+		this.state = {
+			searchString: "",
+			showCreateEventForm: false,
+			showFeedback: false,
+			createEventErrorMsg: "",
+			dialog: {
+				title: "",
+				actions: [],
+				content: "",
+			},
+			newEventId: "",
+			context: context,
+		}
+	}
 	static contextTypes = {
-    leftMargin: React.PropTypes.object,
+    spacingLeft: React.PropTypes.object,
   }
 
-	state = {
-		searchString: "",
-		showCreateEventForm: false,
-		showFeedback: false,
-		createEventErrorMsg: "",
-		dialog: {
-			title: "",
-			actions: [],
-			content: "",
-		},
-		newEventId: "",
-	}
+
 
 	getMeteorData() {
 		let currentEventId = Meteor.user().currentEvent.eventId;
@@ -162,6 +167,7 @@ class EventContainer extends Component {
 
 	render() {
 		console.log("current context. ", this.context);
+		console.log("current state.context. ", this.state.context);
 		if (this.data.isReady) {
 			return (
 			<div>

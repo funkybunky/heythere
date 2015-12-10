@@ -39,7 +39,7 @@ class App extends Component {
     spacingLeft: React.PropTypes.object,
   }
 
-  getChildContext = () => {
+  getChildContext() {
     return { 
       spacingLeft: {
         marginLeft: "5%",
