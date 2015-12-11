@@ -174,7 +174,7 @@ class EventContainer extends Component {
 					title={this.state.dialog.title}
 					ref="dialog"
 					actions={this.state.dialog.actions}
-				>{this.state.dialog.content}</Dialog>			
+				>{this.state.dialog.content}</Dialog>
 				<div style={this.context.spacingLeft}>
 					{this.data.currentEvent ? <p>You are logged in to this event: {this.data.currentEvent.name}</p> : ""}
 					<EventSearch
@@ -184,11 +184,11 @@ class EventContainer extends Component {
 					<br/>
 					<RaisedButton
 						label={this.state.showCreateEventForm ? "Cancel" : "Create Event" }
-						onClick={this.handleCreateEventButton} 
+						onClick={this.handleCreateEventButton}
 					/>
 				</div>
 				<div style={styles.column}>
-					{this.state.showCreateEventForm ? 
+					{this.state.showCreateEventForm ?
 						<CreateEvent
 							inputHandler={this.createEventHandler}
 							errorMessage={this.state.createEventErrorMsg}
@@ -210,7 +210,7 @@ class EventContainer extends Component {
 	}
 }
 
-EventContainer.contextTypes = { 
+EventContainer.contextTypes = {
 	history: PropTypes.history,
 	tag: React.PropTypes.string,
 	spacingLeft: React.PropTypes.object,
@@ -226,5 +226,5 @@ const styles = {
 		alignItems: "center",
 		justifyContent: "space-between",
 		// justifyContent: "center",
-	},		
+	},
 };
