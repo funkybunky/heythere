@@ -3,7 +3,7 @@ const myLogoutFunc = function () {
   console.log("logout");
 }
 const mySubmitFunc = function () {
-  console.log("submit");
+  console.log("submit X");
 }
 const myPreSubmitFunc = function () {
   console.log("presubmit");
