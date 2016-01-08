@@ -29,6 +29,14 @@ const menuItems = [
   { route: '/events', text: 'Events' },
 ];
 
+const mainStyles = {
+  spacingLeft: {
+    marginLeft: "5%",
+    marginRight: "5%",
+  },
+  tag: "bla",
+}
+
 // console.log("History: ", History);
 
 @reactMixin.decorate(ReactMeteorData)
@@ -39,12 +47,7 @@ class App extends Component {
   // ff43dbf9dc6f85064ea6bbfb444b5557df/src/modern/class/__tests__
   // /ReactES6Class-test.js#L103-L104
   getChildContext() {
-    return { 
-      spacingLeft: { 
-        marginLeft: "5%" 
-      },
-      tag: "bla",
-    };
+    return mainStyles;
   }
 
   getMeteorData() {
@@ -80,26 +83,45 @@ class App extends Component {
   }
 
   render() {
+    let content;
+    if (!this.data.currentUser) {
+      content = (
+        <div style={mainStyles.spacingLeft}>
+          <h1>Welcome to heythere!</h1>
+          <p>In this section we will show how this app will help you how to find the next interesting person to talk to. If you are ready, click the login button on the top right to get started!</p>
+        </div>
+      )
+    } else if (this.data.isReady) {
+      content = (
+          <section>
+            {/*<h1>Hello, you are logged in as {this.data.currentUser.username}!</h1>*/}
+            {/*<Link to="/feed"><button>Go to Feed</button></Link>*/}
+            {this.props.children}
+          </section>
+        )
+    } else {
+      content = <CircularProgress mode="indeterminate" size={2} />
+    }
     return (
       <div className="App">
-        
+
         <AppBar title="HeyThere!"
           iconElementRight={<BlazeTemplProps template={Template.loginButtons} btp-align="right" />} iconStyleRight={{color: "white"}} onLeftIconButtonTouchTap={this.handleMenuClick}
         />
 
-        <LeftNav 
-          ref="leftNav" 
-          docked={false} 
+        <LeftNav
+          ref="leftNav"
+          docked={false}
           menuItems={menuItems}
           onChange={this.onLeftNavChange}
         />
 
         {/*<FlatButton label="Testbutton" primary={true} /> */}
-        
+
       {/*
-        <AppBar 
+        <AppBar
           title="HeyThere!"
-          iconElementRight={ 
+          iconElementRight={
             <IconMenu iconButtonElement={<IconButton iconClassName="muidocs-icon-custom-github" />}>
               <MenuItem primaryText="Refresh" ><BlazeTemplate template={Template.atNavButton} /></MenuItem>
               <MenuItem primaryText="Help" />
@@ -108,18 +130,8 @@ class App extends Component {
           }
         />
       */}
-       
 
-        { this.data.isReady ? (
-          <section>
-            {/*<h1>Hello, you are logged in as {this.data.currentUser.username}!</h1>*/}
-            {/*<Link to="/feed"><button>Go to Feed</button></Link>*/}
-            {this.props.children}
-          </section>
-        ) : (
-          <CircularProgress mode="indeterminate" size={2} />
-        )
-        }
+        { content }
 
       </div>
     );
