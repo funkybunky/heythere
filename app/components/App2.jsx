@@ -136,11 +136,11 @@ class App extends Component {
   }
 }
 
-App.contextTypes = { history: PropTypes.history };
 App.childContextTypes = {
   spacingLeft: React.PropTypes.object,
   tag: React.PropTypes.string,
 };
+App.contextTypes = { history: PropTypes.history };
 export default App;
 // https://github.com/rackt/react-router/blob/master/docs/API.md#but-im-using-classes
 
