@@ -33,7 +33,7 @@ export default class EditProfile extends Component {
 		if (e) e.preventDefault();
 		// this.setState({
 		// 	imgSrc: avatarData,
-		// });		
+		// });
 		console.log("changed form!");
 		this.props.inputHandler({
 			firstName: ReactDOM.findDOMNode(this.refs["firstName"]).value,
@@ -62,44 +62,52 @@ export default class EditProfile extends Component {
 			<p>This data is visible to all users</p>
 			<p>Your input is saved as you type</p>
 			<form>
-				<label>First Name: 
-					<input 
-						type="text" 
-						placeholder="Jack" 
-						value={this.props.firstName} 
+				<label>First Name:
+					<br />
+					<input
+						type="text"
+						placeholder="Jack"
+						value={this.props.firstName}
 						onChange={this.handleChange}
 						ref="firstName"
 					/>
 				</label>
 				<br />
-				<label>Profession: 
-					<input 
-						type="text" 
-						placeholder="Full-stack Developer" 
-						value={this.props.profession} 
+				<br />
+				<label>Profession:
+					<br />
+					<input
+						type="text"
+						placeholder="Full-stack Developer"
+						value={this.props.profession}
 						onChange={this.handleChange}
 						ref="profession"
 					/>
 				</label>
 				<br />
-				<label>Hobby/Passion: 
-					<input 
-						type="text" 
-						value={this.props.passion} 
-						onChange={this.handleChange} 
+				<br />
+				<label>Hobby/Passion:
+					<br />
+					<input
+						type="text"
+						value={this.props.passion}
+						onChange={this.handleChange}
 						ref="passion"
 					/>
 				</label>
 				<br />
-				<label>What kind of people do you search for? 
+				<br />
+				<label>What kind of people do you search for?
+					<br />
 					<input
 						type="text"
-						value={this.props.searchesFor} 
-						onChange={this.handleChange} 
+						value={this.props.searchesFor}
+						onChange={this.handleChange}
 						ref="searchesFor"
 					/>
 				</label>
-				<br />	
+				<br />
+				<br />
 				{/*<input type="submit" value="Post" />*/}
 				<label>Avatar:
 				{/*
@@ -114,31 +122,31 @@ export default class EditProfile extends Component {
 			<p>This data is visible only to your confirmed contacts</p>
 			<p>Your input is saved as you type</p>
 			<form>
-				<label>Last Name: 
-					<input 
-						type="text" 
-						placeholder="Jackson" 
-						value={this.props.privateData.lastName} 
+				<label>Last Name:
+					<input
+						type="text"
+						placeholder="Jackson"
+						value={this.props.privateData.lastName}
 						onChange={this.handleChange}
 						ref="lastName"
 					/>
 				</label>
 				<br />
-				<label>Mail: 
-					<input 
-						type="text" 
-						placeholder="jack@jackson.com" 
-						value={this.props.privateData.mail} 
+				<label>Mail:
+					<input
+						type="text"
+						placeholder="jack@jackson.com"
+						value={this.props.privateData.mail}
 						onChange={this.handleChange}
 						ref="mail"
 					/>
 				</label>
 				<br />
 				<label>Skype Id:
-					<input 
-						type="text" 
-						value={this.props.privateData.skypeId} 
-						onChange={this.handleChange} 
+					<input
+						type="text"
+						value={this.props.privateData.skypeId}
+						onChange={this.handleChange}
 						ref="skypeId"
 					/>
 				</label>
