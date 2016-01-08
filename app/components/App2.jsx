@@ -116,8 +116,6 @@ class App extends Component {
           onChange={this.onLeftNavChange}
         />
 
-        {/*<FlatButton label="Testbutton" primary={true} /> */}
-
       {/*
         <AppBar
           title="HeyThere!"
