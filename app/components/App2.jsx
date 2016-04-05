@@ -10,7 +10,7 @@ import BlazeTemplProps from "./BlazeTemplProps.jsx";
 import NearbyPeopleFeed from "./NearbyPeopleFeed/NearbyPeopleFeed";
 import ProfileWrapper from "./EditProfile/ProfileWrapper";
 
-import "normalize.css";
+// import "normalize.css"; // when targeting RN we don't need normalization ;)
 import "./App.css";
 
 import AppBar from 'material-ui/lib/app-bar';
