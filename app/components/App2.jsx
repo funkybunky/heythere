@@ -1,16 +1,15 @@
 /* global Meteor, ReactMeteorData */
+
 import React, {Component} from 'react';
 import { Link, PropTypes } from 'react-router';
 import reactMixin from 'react-mixin';
 
 import {Users, Posts} from '../collections/index.js';
 
-// import BlazeTemplate from './BlazeTemplate';
-import BlazeTemplProps from "./BlazeTemplProps.jsx";
+import BlazeTemplProps from "./BlazeTemplProps";
 import NearbyPeopleFeed from "./NearbyPeopleFeed/NearbyPeopleFeed";
 import ProfileWrapper from "./EditProfile/ProfileWrapper";
 
-// import "normalize.css"; // when targeting RN we don't need normalization ;)
 import "./App.css";
 
 import AppBar from 'material-ui/lib/app-bar';
@@ -36,8 +35,6 @@ const mainStyles = {
   },
   tag: "bla",
 }
-
-// console.log("History: ", History);
 
 @reactMixin.decorate(ReactMeteorData)
 @reactMixin.decorate(History)
@@ -69,21 +66,19 @@ class App extends Component {
       currentUser: Meteor.user(),
     };
   }
+
   handleMenuClick = (e) => {
     e.preventDefault();
     this.refs.leftNav.toggle();
   }
+
   onLeftNavChange = (e, key, payload) => {
-    // console.log("THIS: ", this);
-    // console.log("this.history", this.history);
-    // console.log("this.context: ", this.context);
-    // console.log("this.props.routes: ", this.props.routes);
-    // this.context.router.transitionTo(payload.route);
     this.context.history.pushState(null, payload.route);
   }
 
   render() {
     let content;
+
     if (!this.data.currentUser) {
       content = (
         <div style={mainStyles.spacingLeft}>
@@ -94,14 +89,13 @@ class App extends Component {
     } else if (this.data.isReady) {
       content = (
           <section>
-            {/*<h1>Hello, you are logged in as {this.data.currentUser.username}!</h1>*/}
-            {/*<Link to="/feed"><button>Go to Feed</button></Link>*/}
             {this.props.children}
           </section>
         )
     } else {
       content = <CircularProgress mode="indeterminate" size={2} />
     }
+
     return (
       <div className="App">
 
@@ -115,19 +109,6 @@ class App extends Component {
           menuItems={menuItems}
           onChange={this.onLeftNavChange}
         />
-
-      {/*
-        <AppBar
-          title="HeyThere!"
-          iconElementRight={
-            <IconMenu iconButtonElement={<IconButton iconClassName="muidocs-icon-custom-github" />}>
-              <MenuItem primaryText="Refresh" ><BlazeTemplate template={Template.atNavButton} /></MenuItem>
-              <MenuItem primaryText="Help" />
-              <MenuItem primaryText="Sign out" />
-            </IconMenu>
-          }
-        />
-      */}
 
         { content }
 
@@ -144,6 +125,3 @@ App.contextTypes = { history: PropTypes.history };
 export default App;
 // https://github.com/rackt/react-router/blob/master/docs/API.md#but-im-using-classes
 
-
-// {/*<div>Please Login to see the feed</div>*/}
-// <div>Loading..</div>
