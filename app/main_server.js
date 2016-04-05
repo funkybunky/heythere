@@ -43,7 +43,7 @@ Meteor.publish("getPrivateUserData", function(otherId) {
 		throw new Meteor.Error("not-friends", "You have to be friends in order to view contact info for that user.");
 	}
 	console.log("publish fn getPrivateUserData for user ", Users.findOne(id).username, " - friendIds: ", friendIds);
-	
+
 	// return Users.find({ _id: { $in: friendIds } });	// TODO: select the info
 	const cursor = Users.find(otherId);
 	if (!cursor || cursor.count()===0) {
@@ -74,14 +74,14 @@ Meteor.publish("currentEvent", function() {
 	const currentEvent = Events.findOne(eventId);
 
 	if (typeof currentEvent === "undefined") {
-		that.error( Meteor.Error("unknown-error", "Something strange happened. We don't have a clue. Please reload and give as a shout about it. Sorry.") );
+		that.error( Meteor.Error("unknown-error", "Something strange happened. We don't have a clue. Please reload and give us a shout about it. Sorry.") );
 	}
 
 	console.log("currentEvent pub. participants: ", currentEvent.participants);
 
 	return Events.find(eventId);
 	// return [
-	// 	Events.find(eventId), 
+	// 	Events.find(eventId),
 	// 	Users.find({ _id: { $in: currentEvent.participants } }),
 	// ];
 });
