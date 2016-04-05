@@ -1,5 +1,8 @@
 import { Users } from '../collections';
 
+// Receives a list of user IDs and publishes their full user account infos
+// This implementation is a stub, though. It would need some checks (see
+// comments inside the publish function).
 Meteor.publish("currentEventParticipants", function(participants) {
   console.log("currentEventParticipants called, participants: ", participants);
   const self = this;
