@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router';
 import reactMixin from 'react-mixin';
-import BlazeTemplate from '../BlazeTemplate';
+import BlazeTemplate from '../BlazeTemplProps';
 
 
 
 export default class Login extends Component {
 	constructor(props) {
 		super(props);
-		
+
 	}
 	state = {
 		isLoggedIn: false,

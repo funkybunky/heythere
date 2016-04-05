@@ -6,7 +6,7 @@ import PeopleFilter from "./PeopleFilter/PeopleFilter";
 import {Users} from "../../collections/index";
 import {List} from "immutable";
 
-import BlazeTemplate from '../BlazeTemplate';
+import BlazeTemplate from '../BlazeTemplProps';
 
 import "../../methods/starUser";
 
@@ -21,7 +21,7 @@ export default class PeopleFeed extends Component {
 
 	state = {
 		showStarredOnly: false,
-		iStarredPeopleIds: List(),	
+		iStarredPeopleIds: List(),
 	}
 
 	handleUserInput = (showStarredOnly) => {
@@ -39,7 +39,7 @@ export default class PeopleFeed extends Component {
 		// if (index === -1) {
 		// 	this.setState({
 		// 		iStarredPeopleIds: this.state.iStarredPeopleIds.push(userId),
-		// 	});			
+		// 	});
 		// } else {
 		// 	this.setState({
 		// 		iStarredPeopleIds: this.state.iStarredPeopleIds.remove(index),
@@ -53,13 +53,13 @@ export default class PeopleFeed extends Component {
 		return (
 			<div>
 				<h1>{this.props.currentEvent.name}</h1>
-				<PeopleFilter 
+				<PeopleFilter
 					showStarredOnly={this.state.showStarredOnly}
 					handleUserInput={this.handleUserInput}
 				/>
-				<PeopleTable 
-					people={this.props.participants} 
-					showStarredOnly={this.state.showStarredOnly} 
+				<PeopleTable
+					people={this.props.participants}
+					showStarredOnly={this.state.showStarredOnly}
 					starredPeopleIds={this.props.userData.starredUsers}
 					sentInvites={this.props.userData.sentInvites}
 					receivedInvites={this.props.userData.receivedInvites}
