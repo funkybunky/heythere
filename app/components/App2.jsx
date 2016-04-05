@@ -7,7 +7,7 @@ import reactMixin from 'react-mixin';
 import {Users, Posts} from '../collections/index.js';
 
 import BlazeTemplProps from "./BlazeTemplProps";
-import ProfileWrapper from "./EditProfile/ProfileWrapper";
+import ProfileContainer from "./EditProfile/ProfileContainer";
 
 import "./App.css";
 

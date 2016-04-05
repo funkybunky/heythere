@@ -5,7 +5,7 @@ import reactMixin from 'react-mixin';
 import Profile from "./Profile";
 
 @reactMixin.decorate(ReactMeteorData)
-export default class ProfileWrapper extends Component {
+export default class ProfileContainer extends Component {
 	getMeteorData() {
 		let userHandle = Meteor.subscribe("userData");
 
@@ -22,7 +22,7 @@ export default class ProfileWrapper extends Component {
 	render() {
 		let publicData = this.data.publicData;
 		return (
-			<Profile 
+			<Profile
 
 				firstName={publicData.firstName}
 				profession={publicData.profession}

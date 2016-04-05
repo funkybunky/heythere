@@ -7,7 +7,7 @@ import FeedContainer from "./components/NearbyPeopleFeed/FeedContainer";
 import Contact from './components/Contact/Contact';
 import NewContact from './components/Contact/NewContact';
 import Login from "./components/Login/Login";
-import ProfileWrapper from "./components/EditProfile/ProfileWrapper";
+import ProfileContainer from "./components/EditProfile/ProfileContainer";
 import EventContainer from "./components/Events/EventContainer";
 
 import "./methods/sendInvite";
@@ -51,7 +51,7 @@ Meteor.startup(() => {
 	  			<Route path="login" component={Login} loginCb={handleLogin} />
 	  			<Route path="feed" component={FeedContainer} onEnter={requireAuth} />
 	  			<Route path="contact/:id" component={Contact} onEnter={requireAuth} />
-	  			<Route path="profile" component={ProfileWrapper} onEnter={requireAuth} />
+	  			<Route path="profile" component={ProfileContainer} onEnter={requireAuth} />
 	  			<Route path="events" component={EventContainer} onEnter={requireAuth} />
 	  		</Route>
 	  	</Router>
