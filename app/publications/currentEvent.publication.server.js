@@ -1,3 +1,5 @@
+import { Users } from '../collections';
+
 Meteor.publish("currentEvent", function() {
   const that = this;
 

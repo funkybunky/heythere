@@ -1,4 +1,4 @@
-import {Posts, Users} from './collections';
+import { Posts, Users } from './collections';
 import { Events } from "collections/Events";
 // Prolly used for SSR:
 // import React from 'react';

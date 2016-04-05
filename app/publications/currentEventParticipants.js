@@ -1,4 +1,4 @@
-import {Users} from '../collections';
+import { Users } from '../collections';
 
 Meteor.publish("currentEventParticipants", function(participants) {
   console.log("currentEventParticipants called, participants: ", participants);

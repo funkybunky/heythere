@@ -1,3 +1,5 @@
+import { Users } from '../collections';
+
 Meteor.publish("getPrivateUserData", function(otherId) {
   check(otherId, String);
 
