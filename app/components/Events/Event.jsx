@@ -30,10 +30,6 @@ export default class Event extends Component {
 		const slackMs = Meteor.settings.public.events.joinMinutesBeforeEventStart * 60 * 1000;
 		const now = new Date();
 		const msToEventStart = startsAt - now;
-		// console.log("current event: ", this.props.name);
-		// console.log("startsAt ", startsAt);
-		// console.log("time to event start in moinutes: ", msToEventStart / 60000);
-		// console.log("slack minutes: ", slackMs / 60000);
 		const userCanJoin = slackMs > msToEventStart ? true : false;
 
 		return (
@@ -43,7 +39,7 @@ export default class Event extends Component {
           <TableRowColumn style={styles.columnTime}>{endsAt.getHours()}:{endsAtMinutes}</TableRowColumn>
           <TableRowColumn>{this.props.location}</TableRowColumn>
           <TableRowColumn>{userCanJoin ? <RaisedButton label="Join" onClick={this.handleJoin} /> : <span>Hasn't started yet</span>}</TableRowColumn>
-      </TableRow>			
+      </TableRow>
 		)
 	}
 }
