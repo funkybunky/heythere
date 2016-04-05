@@ -59,9 +59,9 @@ class EventContainer extends Component {
 
 		const searchRegExp = new RegExp(this.state.searchString, "gi");
 		let thisMorning = new Date();
-		thisMorning.setUTCHours(0,0,0,0);
+		thisMorning.setHours(0,0,0,0);
 		let tonight = new Date();
-		tonight.setUTCHours(23,59,59,999);
+		tonight.setHours(23,59,59,999);
 		const queryObj = {
 			"startsAt": { $gte: thisMorning, $lte: tonight },
 			"$or": [
@@ -69,6 +69,7 @@ class EventContainer extends Component {
 				{ "location": { $regex: searchRegExp } },
 			],
 		};
+		debugger;
 
 		return {
 			isReady: eventHandle.ready() && userHandle.ready(),
