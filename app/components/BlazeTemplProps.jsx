@@ -32,3 +32,5 @@ export default class BlazeTemplProps extends React.Component {
     return React.createElement(component, props);
   }
 }
+
+// Use case for login: <BlazeTemplProps template={Template.atForm} btp-state="signIn" />

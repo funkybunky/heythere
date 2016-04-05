@@ -11,7 +11,6 @@ import "../../methods/createEvent";
 
 import EventList from "./EventList";
 import EventSearch from "./EventSearch";
-// import CreateEvent from "./CreateEvent";
 import CreateEvent from "./CreateEventFormsy";
 
 import CircularProgress from "material-ui/lib/circular-progress";

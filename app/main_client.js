@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute } from 'react-router';
 
-import App from './components/App2';
+import App from './components/App';
 import FeedContainer from "./components/NearbyPeopleFeed/FeedContainer";
 import ContactContainer from './components/Contact/ContactContainer';
 import NewContact from './components/Contact/NewContact';
