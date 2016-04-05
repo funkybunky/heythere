@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute } from 'react-router';
-// import createBrowserHistory from 'react-router/history/lib/createBrowserHistory';
 
-import App from './components/App2.jsx';
-// import NearbyPeopleFeed from './components/NearbyPeopleFeed/NearbyPeopleFeed.jsx';
+import App from './components/App2';
 import FeedContainer from "./components/NearbyPeopleFeed/FeedContainer";
-import Contact from './components/Contact/Contact.jsx';
-import NewContact from './components/Contact/NewContact.jsx';
-import Login from "./components/Login/Login.jsx";
+import Contact from './components/Contact/Contact';
+import NewContact from './components/Contact/NewContact';
+import Login from "./components/Login/Login";
 import ProfileWrapper from "./components/EditProfile/ProfileWrapper";
 import EventContainer from "./components/Events/EventContainer";
 
@@ -43,28 +41,24 @@ function handleLogin() {
       //   this.history.replaceState(null, location.state.nextPathname)
       // } else {
       //   this.history.replaceState(null, '/about')
-      // }	
+      // }
 }
 
 Meteor.startup(() => {
-	// Meteor.subscribe("users", function() { // don' sub here, do it in the getMeteorData method
 	  ReactDOM.render(
 	  	<Router>
 	  		<Route path="/" component={App} >
-	  			
 	  			<Route path="login" component={Login} loginCb={handleLogin} />
 	  			<Route path="feed" component={FeedContainer} onEnter={requireAuth} />
 	  			<Route path="contact/:id" component={Contact} onEnter={requireAuth} />
-	  			<Route path="profile" component={ProfileWrapper} />
-	  			<Route path="events" component={EventContainer} />
+	  			<Route path="profile" component={ProfileWrapper} onEnter={requireAuth} />
+	  			<Route path="events" component={EventContainer} onEnter={requireAuth} />
 	  		</Route>
 	  	</Router>
 	  , document.getElementById('root')
 	  );
-	// });
 });
-// <IndexRoute component={NearbyPeopleFeed} />
-// 	<Route path="contact/new/:id" component={NewContact} onEnter={requireAuth} />
+
 
 // GEOLOCATION
 // ------------------------------------------------
@@ -77,16 +71,6 @@ if ("geolocation" in navigator) {
   /* geolocation IS NOT available */
   console.log("oh noes! geolocation is not available, app will explode soon!");
 }
-
-// testing mdg:geolocation:
-// console.log("current location: ", Geolocation.currentLocation());
-
-// Tracker.autorun(function() {
-// 	Session.set("loc", Geolocation.currentLocation);
-// 	console.log(Session.get("loc"));
-// });
-
-
 
 // ------------------------------------------------
 
