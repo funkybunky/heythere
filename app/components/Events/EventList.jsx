@@ -1,6 +1,5 @@
 /* global Meteor */
 import React, { Component } from "react";
-// import ReactDOM from "react-dom";
 
 import Event from "./Event";
 
@@ -16,8 +15,8 @@ export default class EventList extends Component {
 		handleJoinEvent: React.PropTypes.func.isRequired,
 	}
 	render() {
-		const rows = this.props.events.map((event) => 
-			<Event 
+		const rows = this.props.events.map((event) =>
+			<Event
 				name={event.name}
 				location={event.location}
 				startsAt={event.startsAt}
@@ -44,7 +43,7 @@ export default class EventList extends Component {
               </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={true} selectable={true} stripedRows={true} >{rows}</TableBody>
-      </Table>			
+      </Table>
 		)
 	}
 }
@@ -54,24 +53,3 @@ const styles = {
 		width: "3em",
 	},
 };
-
-          // <TableHeader
-          // 	displaySelectAll={false}
-          // 	adjustForCheckbox={false}
-          // >
-
-			// <div>eventlist
-			// 	{rows}
-			// </div>
-
-			   // <table>
-      //     <thead>
-      //         <tr>
-      //             <th>Name</th>
-      //             <th>Starts</th>
-      //             <th>Ends</th>
-      //             <th>Location</th>
-      //         </tr>
-      //     </thead>
-      //     <tbody>{rows}</tbody>
-      // </table>	
