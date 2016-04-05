@@ -16,7 +16,7 @@ export default class Profile extends Component {
 				Meteor.call("changePublicData", publicData, privateData, (err, res) => {
 					if (err) console.log("err occured during changePublicData: ", err);
 					if (res) {
-						if (_.isEqual(publicData, this.state.publicData) && 
+						if (_.isEqual(publicData, this.state.publicData) &&
 								_.isEqual(privateData, this.state.privateData)) {
 							// need immutable data to do this :)
 							// well, to do it performantly, but lodash does the job for the prototype ;)
@@ -37,20 +37,16 @@ export default class Profile extends Component {
 			searchesFor: this.props.searchesFor,
 			avatar: this.props.avatar,
 		},
-		isSaved: true,		
+		isSaved: true,
 		privateData: this.props.privateData,
 	}
 	inputHandler = (publicData, privateData) => {
-		console.log("handler called");
 		this.setState({
 			publicData: publicData,
 			isSaved: false,
 			privateData: privateData,
 		})
 		this.throttledMethod(publicData, privateData);
-		// Meteor.call("changePublicData", publicData, (err, res) => {
-		// 	if (err) console.log(err);
-		// });
 	}
 	render() {
 		let publicData = this.state.publicData;
@@ -59,7 +55,7 @@ export default class Profile extends Component {
 			<div style={style.column}>
 				{this.state.isSaved ? <p style={style.status.saved}>Changes saved.</p> : <p style={style.status.saving}>Saving changes..</p>}
 
-				<EditProfile 
+				<EditProfile
 					inputHandler={this.inputHandler}
 
 					firstName={publicData.firstName}
@@ -84,7 +80,7 @@ const style = {
 		alignItems: "center",
 		justifyContent: "space-between",
 		// justifyContent: "center",
-	},	
+	},
 	status: {
 		saved: {
 			color: "green",
