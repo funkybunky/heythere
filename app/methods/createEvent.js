@@ -5,8 +5,8 @@ import { throwLoggedOutError } from "../helpers";
 Meteor.methods({
 	createEvent(eventData) {
 		check(eventData, EventSchema);
-		const that = this;
-		if (!that.userId) throwLoggedOutError();
+		const self = this;
+		if (Meteor.isClient && !self.userId) throwLoggedOutError();
 
 		if (eventData.name === "duplicate") return { message: "duplicate" }
 
