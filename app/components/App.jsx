@@ -20,7 +20,6 @@ import CircularProgress from "material-ui/lib/circular-progress";
 import LeftNav from "material-ui/lib/left-nav";
 
 const menuItems = [
-  // { route: 'get-started', text: 'Get Started' },
   { route: '/', text: 'Home' },
   { route: '/profile', text: 'Profile' },
   { route: '/feed', text: 'Feed' },
