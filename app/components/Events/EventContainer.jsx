@@ -68,7 +68,6 @@ class EventContainer extends Component {
 				{ "location": { $regex: searchRegExp } },
 			],
 		};
-		debugger;
 
 		return {
 			isReady: eventHandle.ready() && userHandle.ready(),
