@@ -1,3 +1,10 @@
+Start with:
+```
+> npm install
+> node dev.js
+```
+
+Original README follows:
 # meteor-webpack-react
 
 This is a Meteor project skeleton where the client (in React) and server get built by Webpack.  In dev mode,
